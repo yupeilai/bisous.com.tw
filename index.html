@@ -1,0 +1,22 @@
+---
+layout: default
+additional_script:
+  - /js/home.js
+---
+
+<div id="app">
+  <example-component :text="test_header"></example-component>
+  {! test_message | remove_html !}
+  <hr />
+  <p v-html="test_message"></p>
+</div>
+<script>
+// test myjson api
+$(function(){
+   $.ajax("https://api.myjson.com/bins/12pva7", {
+      success: function(data) {
+        console.log(data);
+      }
+   });
+});
+</script>
