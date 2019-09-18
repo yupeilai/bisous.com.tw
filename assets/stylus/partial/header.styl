@@ -1,14 +1,38 @@
+$header-height = 100px
+$header-height-sticky = 90px
+
 #header
   position relative
+  padding 16px 32px
   clearfix()
 
-  .brand
-    float left
-    font-size 2rem
-    line-height 2rem
-    padding 20px
+  &.sticky
+    position fixed
+    width 100%
+    height $header-height-sticky
+    left 0
+    right 0
+    top 0
+    padding 8px 0
+    margin 0
+    background-color #EAEBED
+    #header-brand
+      width $header-height-sticky
+      height $header-height-sticky
+    #header-nav li
+      line-height $header-height-sticky
 
-  ul
+  #header-brand
+    display block
+    height $header-height
+    width $header-height
+    float left
+    background-image url('/images/logo.png')
+    background-repeat no-repeat
+    background-position center center
+    background-size contain
+
+  #header-nav
     list-style none
     padding 0
     margin 0
@@ -16,4 +40,9 @@
     li
       list-style none
       display inline-block
-      margin 20px 40px
+      margin 0 40px
+      line-height $header-height
+      &:first-child
+        margin-left 0
+      &:last-child
+        margin-right 0

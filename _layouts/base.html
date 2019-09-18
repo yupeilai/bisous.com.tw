@@ -19,15 +19,11 @@ layout: compress
       {% include og.html %}
     </head>
     <body>
-      {% if page.use_facebook_api %}
-        {% include facebook-api.html %}
-      {% endif %}
       <div id="page">
         {{ content }}
       </div>
-
       {% include foot.html %}
-      {% include ga.html %}
+      <!-- {% include ga.html %} -->
     </body>
   </html>
 {% endif %}

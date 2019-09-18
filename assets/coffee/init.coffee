@@ -66,5 +66,4 @@ window.onload = ->
   $('body').addClass 'loaded'
 
 $ ->
-  # dotdotdot
-  $('.ddd').dotdotdot()
+  # do something

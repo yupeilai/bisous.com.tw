@@ -1,18 +1,5 @@
-#==========================================
-# Component
-#==========================================
-Vue.component 'example-component',
-  props: [ 'text' ]
-  template: '<h1>{{ text }}</h1>'
-
-#==========================================
-# Filter
-#==========================================
-Vue.filter 'remove_html', (value) ->
-  div = document.createElement('div')
-  div.innerHTML = value
-  text = div.textContent or div.innerText or ''
-  text
+#=require init.coffee
+#=require component/*.coffee
 
 
 #==========================================
@@ -31,14 +18,4 @@ app = new Vue(
     xx 'App mounted.'
   updated: ->
     xx 'App updated.'
-
-  computed:
-    reversed_string: ->
-      @description.split('').reverse().join('')
-
-  methods:
-    reverse_description: ->
-      @description = @description.split('').reverse().join('')
-    alert_rock: ->
-      alert 'rock!'
 )
