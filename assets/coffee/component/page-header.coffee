@@ -1,17 +1,17 @@
-Vue.component 'hero',
+Vue.component 'page-header',
   template: """
     <header id="header" class="">
       <div class="wrapper">
         <a href="/" id="header-brand"></a>
         <ul id="header-nav">
           <li>
-            <a href="/about">About</a>
+            <router-link :to="{name: 'about'}">About</router-link>
           </li>
           <li>
-            <a href="/themes">Themes</a>
+            <router-link :to="{name: 'themes'}">Themes</router-link>
           </li>
           <li>
-            <a href="/qna">Q&A</a>
+            <router-link :to="{name: 'faq'}">FAQ</router-link>
           </li>
         </ul>
       </div>

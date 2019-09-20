@@ -1,6 +1,8 @@
-var DEBUG, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, xx;
+var About, DEBUG, FAQ, Home, Themes, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, xx;
 
 DEBUG = true;
+
+Vue.options.delimiters = ['${', '}'];
 
 window.countdown = Date.now();
 
@@ -96,27 +98,69 @@ window.onload = function() {
 $(function() {});
 
 Vue.component('hero', {
-  template: "<header id=\"header\" class=\"\">\n  <div class=\"wrapper\">\n    <a href=\"/\" id=\"header-brand\"></a>\n    <ul id=\"header-nav\">\n      <li>\n        <a href=\"/about\">About</a>\n      </li>\n      <li>\n        <a href=\"/themes\">Themes</a>\n      </li>\n      <li>\n        <a href=\"/qna\">Q&A</a>\n      </li>\n    </ul>\n  </div>\n</header>"
+  template: "<div id=\"hero\">\n  <div id=\"hero-content\">\n    <div class=\"wrapper\">\n      <h1>喜帖產生器</h1>\n      <h4>創造出屬於你/妳的喜帖</h4>\n    </div>\n  </div>\n</div>"
 });
 
-Vue.component('hero', {
-  template: "<div id=\"hero\">\n  <h1>Hero</h1>\n</div>"
+Vue.component('page-header', {
+  template: "<header id=\"header\" class=\"\">\n  <div class=\"wrapper\">\n    <a href=\"/\" id=\"header-brand\"></a>\n    <ul id=\"header-nav\">\n      <li>\n        <router-link :to=\"{name: 'about'}\">About</router-link>\n      </li>\n      <li>\n        <router-link :to=\"{name: 'themes'}\">Themes</router-link>\n      </li>\n      <li>\n        <router-link :to=\"{name: 'faq'}\">FAQ</router-link>\n      </li>\n    </ul>\n  </div>\n</header>"
+});
+
+About = {
+  template: "<div>\n  <h1>About</h1>\n</div>"
+};
+
+FAQ = {
+  template: "<div>\n  <h1>FAQ</h1>\n</div>"
+};
+
+Home = {
+  template: "<div>\n  <hero></hero>\n</div>"
+};
+
+Themes = {
+  template: "<div>\n  <h1>Themes</h1>\n</div>"
+};
+
+routes = [
+  {
+    path: '/',
+    component: {
+      template: '<router-view></router-view>'
+    },
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: Home
+      }, {
+        path: 'about',
+        name: 'about',
+        component: About
+      }, {
+        path: 'themes',
+        name: 'themes',
+        component: Themes
+      }, {
+        path: 'faq',
+        name: 'faq',
+        component: FAQ
+      }
+    ]
+  }
+];
+
+router = new VueRouter({
+  routes: routes,
+  mode: 'history'
 });
 
 app = new Vue({
-  delimiters: ['{!', '!}'],
-  el: '#app',
-  data: {
-    test_header: 'Hello World!',
-    test_message: '<p>議書一沒回水帶下之德。類裡不可這師成做子甚華題突車似不辦法戰權。解現斯然院的書量正果。黃去十，就起想市現格聲能成被準食是展。腦車害，之音很校過我他政市形打現目然素展準的下出這大親過構，制因究是……情市學！們人想關知。連可不各師重子有空第、世會以……球校和光事老國；站她力其自電股不建不來力。長明在與長心運。事手營價為來想國黨情識會後義一不讓多孩綠我去送人能意覺不此他了；的族的天第不爸書正的麼我國法進少年少，時他牛受看。</p><p>我質府！面氣的利給吃認！是近完管老區：性社。</p><p>沒過早……能排經業也怎經笑認；生大友主，如分究關度卻特來選司的有長，時的中速己爭快。國如體之用事轉大光至影個內亞？</p><p>已是主從以這！面的容工那對所製全是夫的的賽立己理上光，德水手新？會十是立流衣本三不票功的是易……人門地山觀容外新在性可建造康得考標於：世麼酒量類：旅長問之們員度的不術品構又們心裝中策無識法小假遠之過就生到房安三營因了語！注有世李和想助感臺喜往體親們富保是。</p>'
-  },
-  created: function() {
-    return xx('App created.');
+  router: router,
+  mixins: [],
+  data: function() {
+    return {};
   },
   mounted: function() {
-    return xx('App mounted.');
-  },
-  updated: function() {
-    return xx('App updated.');
+    return xx('app mounted');
   }
-});
+}).$mount('#app');
