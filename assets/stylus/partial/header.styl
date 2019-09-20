@@ -1,12 +1,13 @@
 $header-height = 100px
-$header-height-sticky = 90px
+$header-height-sticky = 60px
 
 #header
   // position relative
-  // padding 16px 32px
+  padding 16px 0
   position fixed
   width 100%
   z-index 9999
+  transition all .3s linear,padding .3s linear
   clearfix()
 
   &.sticky
@@ -24,6 +25,8 @@ $header-height-sticky = 90px
       height $header-height-sticky
     #header-nav li
       line-height $header-height-sticky
+    #header-nav li a
+      color $global-text-color
 
   #header-brand
     display block
@@ -34,6 +37,7 @@ $header-height-sticky = 90px
     background-repeat no-repeat
     background-position center center
     background-size contain
+    transition all .3s linear,padding .3s linear
 
   #header-nav
     list-style none
@@ -45,6 +49,8 @@ $header-height-sticky = 90px
       display inline-block
       margin 0 40px
       line-height $header-height
+      a
+        color #FFFFFF
       &:first-child
         margin-left 0
       &:last-child

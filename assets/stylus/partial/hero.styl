@@ -1,15 +1,34 @@
 #hero
   position relative
   width 100%
-  min-height 80vh
+  min-height 100vh
   background-image url('/images/featured-image.jpg')
   background-size cover
   background-position center center
   background-repeat no-repeat
   color #FFFFFF
 
-  #hero-content
+  #hero-overlay
     position absolute
-    width 100%
+    top 0
+    left 0
+    right 0
     bottom 0
+    background rgba(0, 0, 0, .5)
+
+  #hero-content
+    min-height 100vh
+    display flex
+    flex-direction column
+    justify-content flex-end
+    box-sizing border-box
+    padding-left 4px
+    padding-bottom 64px
+
+    h1
+      font-size 55px
+
+    h4
+      font-size 22px
+      margin-left 4px
 

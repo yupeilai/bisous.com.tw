@@ -98,7 +98,11 @@ window.onload = function() {
 $(function() {});
 
 Vue.component('hero', {
-  template: "<div id=\"hero\">\n  <div id=\"hero-content\">\n    <div class=\"wrapper\">\n      <h1>喜帖產生器</h1>\n      <h4>創造出屬於你/妳的喜帖</h4>\n    </div>\n  </div>\n</div>"
+  template: "<div id=\"hero\">\n  <div id=\"hero-overlay\"></div>\n  <div class=\"wrapper\">\n    <div id=\"hero-content\">\n      <div>\n        <h1>喜帖產生器</h1>\n        <h4>創造出屬於你/妳的喜帖</h4>\n      </div>\n    </div>\n  </div>\n</div>"
+});
+
+Vue.component('home-themes', {
+  template: "<div id=\"home-themes\">\n  <div class=\"wrapper\">\n    <h2>Choose a Theme</h2>\n  </div>\n</div>"
 });
 
 Vue.component('page-header', {
@@ -114,7 +118,7 @@ FAQ = {
 };
 
 Home = {
-  template: "<div>\n  <hero></hero>\n</div>"
+  template: "<div>\n  <hero></hero>\n  <home-themes></home-themes>\n</div>"
 };
 
 Themes = {
@@ -157,10 +161,27 @@ router = new VueRouter({
 app = new Vue({
   router: router,
   mixins: [],
+  methods: {
+    handle_scroll: function(event) {
+      if (window.scrollY > 20) {
+        return $('#header').addClass('sticky');
+      } else {
+        if ($('#header').hasClass('sticky')) {
+          return $('#header').removeClass('sticky');
+        }
+      }
+    }
+  },
   data: function() {
     return {};
   },
   mounted: function() {
     return xx('app mounted');
+  },
+  created: function() {
+    return window.addEventListener('scroll', this.handle_scroll);
+  },
+  destroyed: function() {
+    return window.removeEventListener('scroll', this.handle_scroll);
   }
 }).$mount('#app');
