@@ -23,6 +23,7 @@ $header-height-sticky = 60px
     #header-brand
       width $header-height-sticky
       height $header-height-sticky
+      background-image url('/images/logo.png') !important
     #header-nav li
       line-height $header-height-sticky
     #header-nav li a
@@ -38,6 +39,8 @@ $header-height-sticky = 60px
     background-position center center
     background-size contain
     transition all .3s linear,padding .3s linear
+    .home &
+      background-image url('/images/logo-white.png')
 
   #header-nav
     list-style none
