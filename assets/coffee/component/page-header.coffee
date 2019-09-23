@@ -2,7 +2,7 @@ Vue.component 'page-header',
   template: """
     <header id="header" class="">
       <div class="wrapper">
-        <a href="/" id="header-brand"></a>
+        <router-link :to="{name: 'home'}" id="header-brand"></router-link>
         <ul id="header-nav">
           <li>
             <router-link :to="{name: 'about'}">About</router-link>

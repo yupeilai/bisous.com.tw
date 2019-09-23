@@ -1,4 +1,4 @@
-var About, DEBUG, FAQ, Home, Themes, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, xx;
+var About, DEBUG, FAQ, Home, Themes, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
 
 DEBUG = true;
 
@@ -24,6 +24,10 @@ headerTo = function(path) {
 
 focusFirstInput = function() {
   return $('form').find('input[type="text"], textarea').first().focus();
+};
+
+scrollTop = function() {
+  return zenscroll.toY(0, 1);
 };
 
 detectBrowserLang = function() {
@@ -106,15 +110,15 @@ Vue.component('home-themes', {
 });
 
 Vue.component('page-header', {
-  template: "<header id=\"header\" class=\"\">\n  <div class=\"wrapper\">\n    <a href=\"/\" id=\"header-brand\"></a>\n    <ul id=\"header-nav\">\n      <li>\n        <router-link :to=\"{name: 'about'}\">About</router-link>\n      </li>\n      <li>\n        <router-link :to=\"{name: 'themes'}\">Themes</router-link>\n      </li>\n      <li>\n        <router-link :to=\"{name: 'faq'}\">FAQ</router-link>\n      </li>\n    </ul>\n  </div>\n</header>"
+  template: "<header id=\"header\" class=\"\">\n  <div class=\"wrapper\">\n    <router-link :to=\"{name: 'home'}\" id=\"header-brand\"></router-link>\n    <ul id=\"header-nav\">\n      <li>\n        <router-link :to=\"{name: 'about'}\">About</router-link>\n      </li>\n      <li>\n        <router-link :to=\"{name: 'themes'}\">Themes</router-link>\n      </li>\n      <li>\n        <router-link :to=\"{name: 'faq'}\">FAQ</router-link>\n      </li>\n    </ul>\n  </div>\n</header>"
 });
 
 About = {
-  template: "<div>\n  <h1>About</h1>\n</div>"
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>About</h1>\n  </div>\n</div>"
 };
 
 FAQ = {
-  template: "<div>\n  <h1>FAQ</h1>\n</div>"
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>FAQ</h1>\n  </div>\n</div>"
 };
 
 Home = {
@@ -122,7 +126,7 @@ Home = {
 };
 
 Themes = {
-  template: "<div>\n  <h1>Themes</h1>\n</div>"
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Themes</h1>\n  </div>\n</div>"
 };
 
 routes = [
@@ -156,6 +160,18 @@ routes = [
 router = new VueRouter({
   routes: routes,
   mode: 'history'
+});
+
+router.beforeEach(function(to, from, next) {
+  $('#page-loading').addClass('show');
+  scrollTop();
+  return next();
+});
+
+router.afterEach(function(to, from) {
+  return setTimeout(function() {
+    return $('#page-loading').removeClass('show');
+  }, 300);
 });
 
 app = new Vue({

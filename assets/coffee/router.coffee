@@ -27,17 +27,20 @@ router = new VueRouter(
   mode: 'history'
 )
 
-# router.beforeEach (to, from, next) ->
-#   setTimeout( ->
-#     $('#page_loading').show()
-#     scroll_top()
-#     window.onbeforeunload = ->
-#       $('body').hide()
-#       scroll_top()
-#   , 100)
-#   next()
+router.beforeEach (to, from, next) ->
+  $('#page-loading').addClass 'show'
+  scrollTop()
+  # setTimeout( ->
+  #   xx 'here'
+  #   $('#page-loading').addClass 'show'
+  #   scrollTop()
+  #   window.onbeforeunload = ->
+  #     $('body').hide()
+  #     scrollTop()
+  # , 3000)
+  next()
 
-# router.afterEach (to, from) ->
-#   setTimeout( ->
-#     $('#page_loading').hide()
-#   , 100)
+router.afterEach (to, from) ->
+  setTimeout( ->
+    $('#page-loading').removeClass 'show'
+  , 300)

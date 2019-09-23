@@ -1,6 +1,8 @@
 Themes =
   template: """
-    <div>
-      <h1>Themes</h1>
+    <div class="default-layout">
+      <div class="wrapper">
+        <h1>Themes</h1>
+      </div>
     </div>
   """

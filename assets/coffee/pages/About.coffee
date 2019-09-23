@@ -1,6 +1,8 @@
 About =
   template: """
-    <div>
-      <h1>About</h1>
+    <div class="default-layout">
+      <div class="wrapper">
+        <h1>About</h1>
+      </div>
     </div>
   """

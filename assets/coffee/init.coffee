@@ -26,6 +26,7 @@ xx = (x) -> DEBUG && console.log x
 float = (val) -> parseFloat val.replace 'px', ''
 headerTo = (path) -> window.location = path
 focusFirstInput = -> $('form').find('input[type="text"], textarea').first().focus()
+scrollTop = -> zenscroll.toY 0, 1
 detectBrowserLang = -> language = navigator.languages and navigator.languages[0] or navigator.language or navigator.userLanguage
 
 detectInFBApp = ->
