@@ -5,6 +5,7 @@ routes = [
       template: '<router-view></router-view>'
     children: [
       { path: '', name: 'home', component: Home }
+      { path: 'generator', name: 'generator', component: Generator }
       { path: 'about', name: 'about', component: About }
       { path: 'themes', name: 'themes', component: Themes }
       { path: 'faq', name: 'faq', component: FAQ }

@@ -1,0 +1,47 @@
+.button
+  display inline-block
+  padding 16px 32px !important
+  background $color-black-dark
+  color $color-white
+  min-width 120px
+  text-align center
+  text-decoration none
+  border 0
+  border-radius 8888px
+  font-size 1rem
+  line-height 1
+  cursor pointer
+  transition background .3s
+  margin 8px 0
+  user-select none
+
+  +below(__)
+    font-size .75rem
+
+  &:hover
+    background lighten($color-black-dark, 20%)
+    color $color-white
+
+  &:focus
+    box-shadow 0 0 0 2px $color-white, 0 0 0 4px rgba(50, 100 ,150, .4)
+
+  &.danger
+    background $color-red
+    color $color-white
+    &:hover
+      background lighten($color-red, 20%)
+
+  &.link
+    background none
+    color $color-black
+
+  &.outlined
+    border 2px solid $color-black
+
+  &.outlined-white
+    border 2px solid $color-white
+    color $color-white
+    background rgba(255, 255, 255, .3)
+
+.button + .button
+  margin-left 16px
