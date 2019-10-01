@@ -2,7 +2,6 @@ $header-height = 100px
 $header-height-sticky = 60px
 
 #header
-  // position relative
   padding 16px 0
   position fixed
   left 0
@@ -11,40 +10,52 @@ $header-height-sticky = 60px
   width 100%
   z-index 9999
   transition all .3s linear
-  clearfix()
+
+  .wrapper
+    display flex
 
   &.sticky
     height $header-height-sticky
     padding 8px 0
     margin 0
     background-color #EAEBED
-    #header-brand
+    #header-brand a
       width 197px
       height $header-height-sticky
       background-image url('/images/logo-h.png') !important
     #header-nav li
       line-height $header-height-sticky
     #header-nav li a
+    #header-cart a
       color $global-text-color !important
 
   #header-brand
     display block
-    height $header-height
-    width $header-height
-    float left
-    background-image url('/images/logo.png')
-    background-repeat no-repeat
-    background-position center center
-    background-size contain
-    transition height .3s linear
-    .home &
-      background-image url('/images/logo-white.png')
+    flex 1
+    display flex
+    justify-content flex-start
+    align-items center
+    a
+      height $header-height
+      width $header-height
+      background-image url('/images/logo.png')
+      background-repeat no-repeat
+      background-position center center
+      background-size contain
+      transition height .3s linear
+      .home &
+        background-image url('/images/logo-white.png')
 
   #header-nav
     list-style none
     padding 0
     margin 0
-    float right
+    display flex
+    align-items center
+    justify-content center
+    ul
+      margin 0
+      padding 0
     li
       list-style none
       display inline-block
@@ -57,4 +68,13 @@ $header-height-sticky = 60px
 
     .home &
       li a
+        color #FFFFFF
+
+  #header-cart
+    flex 1
+    display flex
+    justify-content flex-end
+    align-items center
+    .home &
+      a
         color #FFFFFF

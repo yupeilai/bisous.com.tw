@@ -14,10 +14,10 @@ app = new Vue({
   methods:
     handle_scroll: (event) ->
       if window.scrollY > 20
-        $('#header').addClass 'sticky'
+        jQuery('#header').addClass 'sticky'
       else
-        if $('#header').hasClass 'sticky'
-          $('#header').removeClass 'sticky'
+        if jQuery('#header').hasClass 'sticky'
+          jQuery('#header').removeClass 'sticky'
 
   data: ->
     {

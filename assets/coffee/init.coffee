@@ -70,7 +70,4 @@ isMobileChrome = ->
 # Events
 #==========================================
 window.onload = ->
-  $('body').addClass 'loaded'
-
-$ ->
-  # do something
+  jQuery('body').addClass 'loaded'

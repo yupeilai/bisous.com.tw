@@ -9,6 +9,7 @@ routes = [
       { path: 'about', name: 'about', component: About }
       { path: 'themes', name: 'themes', component: Themes }
       { path: 'faq', name: 'faq', component: FAQ }
+      { path: 'cart', name: 'cart', component: Cart }
       # {
       #   path: '*'
       #   component:
@@ -29,19 +30,19 @@ router = new VueRouter(
 )
 
 router.beforeEach (to, from, next) ->
-  $('#page-loading').addClass 'show'
+  jQuery('#page-loading').addClass 'show'
   scrollTop()
   # setTimeout( ->
   #   xx 'here'
-  #   $('#page-loading').addClass 'show'
+  #   jQuery('#page-loading').addClass 'show'
   #   scrollTop()
   #   window.onbeforeunload = ->
-  #     $('body').hide()
+  #     jQuery('body').hide()
   #     scrollTop()
   # , 3000)
   next()
 
 router.afterEach (to, from) ->
   setTimeout( ->
-    $('#page-loading').removeClass 'show'
+    jQuery('#page-loading').removeClass 'show'
   , 300)
