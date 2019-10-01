@@ -1,4 +1,4 @@
-var About, Cart, DEBUG, FAQ, Generator, Home, Themes, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
+var About, Cart, DEBUG, FAQ, Generator, Home, Themes, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
 
 DEBUG = true;
 
@@ -104,7 +104,44 @@ Vue.component('hero', {
 });
 
 Vue.component('home-themes', {
-  template: "<div id=\"home-themes\">\n  <div class=\"wrapper\">\n    <h2 class=\"title\">Choose a Theme</h2>\n    <ul class=\"themes-list\">\n      <li class=\"list-item\">\n        <div class=\"item-wrapper\">\n          <router-link :to=\"{name: 'themes'}\">\n            <h3 class=\"theme-title\">喜帖<small>Wedding Card</small></h3>\n            <div class=\"theme-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          </router-link>\n        </div>\n      </li>\n      <li class=\"list-item\">\n        <div class=\"item-wrapper\">\n          <router-link :to=\"{name: 'themes'}\">\n            <h3 class=\"theme-title\">回函卡<small>RSVP</small></h3>\n            <div class=\"theme-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          </router-link>\n        </div>\n      </li>\n      <li class=\"list-item\">\n        <div class=\"item-wrapper\">\n          <router-link :to=\"{name: 'themes'}\">\n            <h3 class=\"theme-title\">感謝卡<small>Thank you Card</small></h3>\n            <div class=\"theme-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          </router-link>\n        </div>\n      </li>\n      <li class=\"list-item\">\n        <div class=\"item-wrapper\">\n          <router-link :to=\"{name: 'themes'}\">\n            <h3 class=\"theme-title\">座位卡<small>Seating Card</small></h3>\n            <div class=\"theme-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          </router-link>\n        </div>\n      </li>\n      <li class=\"list-item\">\n        <div class=\"item-wrapper\">\n          <router-link :to=\"{name: 'themes'}\">\n            <h3 class=\"theme-title\">禮物小卡<small>Gift Card</small></h3>\n            <div class=\"theme-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          </router-link>\n        </div>\n      </li>\n      <li class=\"list-item\">\n        <div class=\"item-wrapper\">\n          <router-link :to=\"{name: 'themes'}\">\n            <h3 class=\"theme-title\">其他<small>Others</small></h3>\n            <div class=\"theme-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          </router-link>\n        </div>\n      </li>\n    </ul>\n  </div>\n</div>"
+  template: "<div id=\"home-themes\">\n  <div class=\"wrapper\">\n    <h2 class=\"title\">Choose a Theme</h2>\n    <ul class=\"themes-list\">\n      <li class=\"list-item\" v-for=\"(item, index) in themes\">\n        <div class=\"item-wrapper\">\n          <router-link :to=\"{name: item.router_name}\">\n            <h3 class=\"theme-title\">${item.title}<small>${item.title_en}</small></h3>\n            <div class=\"theme-image\" :style=\"{ backgroundImage: 'url(' + item.image + ')' }\"></div>\n          </router-link>\n        </div>\n      </li>\n    </ul>\n  </div>\n</div>",
+  data: function() {
+    return {
+      themes: [
+        {
+          router_name: 'theme_wedding_card',
+          title: '喜帖',
+          title_en: 'Wedding Card',
+          image: 'http://placehold.jp/600x600.png'
+        }, {
+          router_name: 'theme_rsvp',
+          title: '回函卡',
+          title_en: 'RSVP',
+          image: 'http://placehold.jp/600x600.png'
+        }, {
+          router_name: 'theme_thank_you_card',
+          title: '感謝卡',
+          title_en: 'Thank you Card',
+          image: 'http://placehold.jp/600x600.png'
+        }, {
+          router_name: 'theme_seating_card',
+          title: '座位卡',
+          title_en: 'Seating Card',
+          image: 'http://placehold.jp/600x600.png'
+        }, {
+          router_name: 'theme_gift_card',
+          title: '禮物小卡',
+          title_en: 'Gift Card',
+          image: 'http://placehold.jp/600x600.png'
+        }, {
+          router_name: 'theme_others',
+          title: '其他',
+          title_en: 'Others',
+          image: 'http://placehold.jp/600x600.png'
+        }
+      ]
+    };
+  }
 });
 
 Vue.component('page-header', {
@@ -116,7 +153,7 @@ About = {
 };
 
 Cart = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Cart</h1>\n\n    <form class=\"jotform-form\" action=\"https://submit.jotform.me/submit/92711733585462/\" method=\"post\" name=\"form_92711733585462\" id=\"92711733585462\" accept-charset=\"utf-8\">\n      <input type=\"hidden\" name=\"formID\" value=\"92711733585462\" />\n      <input type=\"hidden\" id=\"JWTContainer\" value=\"\" />\n      <input type=\"hidden\" id=\"cardinalOrderNumber\" value=\"\" />\n      <div role=\"main\" class=\"form-all\">\n        <ul class=\"form-section page-section\">\n          <li id=\"cid_1\" class=\"form-input-wide\" data-type=\"control_head\">\n            <div class=\"form-header-group \">\n              <div class=\"header-text httal htvam\">\n                <h2 id=\"header_1\" class=\"form-header\" data-component=\"header\">\n                  Bisous Cart\n                </h2>\n              </div>\n            </div>\n          </li>\n          <li class=\"form-line jf-required\" data-type=\"control_textbox\" id=\"id_3\">\n            <label class=\"form-label form-label-top form-label-auto\" id=\"label_3\" for=\"input_3\">\n              訂購人\n              <span class=\"form-required\">\n                *\n              </span>\n            </label>\n            <div id=\"cid_3\" class=\"form-input-wide jf-required\">\n              <input type=\"text\" id=\"input_3\" name=\"q3_typeA\" data-type=\"input-textbox\" class=\"form-textbox validate[required]\" size=\"20\" value=\"\" data-component=\"textbox\" aria-labelledby=\"label_3\" required=\"\" />\n            </div>\n          </li>\n          <li class=\"form-line jf-required\" data-type=\"control_textarea\" id=\"id_4\">\n            <label class=\"form-label form-label-top form-label-auto\" id=\"label_4\" for=\"input_4\">\n              喜帖內容\n              <span class=\"form-required\">\n                *\n              </span>\n            </label>\n            <div id=\"cid_4\" class=\"form-input-wide jf-required\">\n              <textarea id=\"input_4\" class=\"form-textarea validate[required]\" name=\"q4_typeA4\" cols=\"40\" rows=\"6\" data-component=\"textarea\" required=\"\" aria-labelledby=\"label_4\">新郎姓名：\n新娘姓名：</textarea>\n            </div>\n          </li>\n          <li class=\"form-line\" data-type=\"control_button\" id=\"id_2\">\n            <div id=\"cid_2\" class=\"form-input-wide\">\n              <div style=\"margin-left:156px\" class=\"form-buttons-wrapper \">\n                <button id=\"input_2\" type=\"submit\" class=\"form-submit-button\" data-component=\"button\">\n                  提交\n                </button>\n              </div>\n            </div>\n          </li>\n          <li style=\"display:none\">\n            Should be Empty:\n            <input type=\"text\" name=\"website\" value=\"\" />\n          </li>\n        </ul>\n      </div>\n      <input type=\"hidden\" id=\"simple_spc\" name=\"simple_spc\" value=\"92711733585462\" />\n      <div class=\"formFooter-heightMask\">\n      </div>\n    </form>\n\n  </div>\n</div>"
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Cart</h1>\n    <p>jotForm here</p>\n  </div>\n</div>"
 };
 
 FAQ = {
@@ -133,6 +170,30 @@ Home = {
 
 Themes = {
   template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Themes</h1>\n  </div>\n</div>"
+};
+
+ThemesGiftCard = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1 class=\"underline\">禮物小卡<small>Gift Card</small></h1>\n    <ul class=\"card-list\">\n      <li class=\"list-item\" v-for=\"index in 6\" :key=\"index\">\n        <div class=\"item-wrapper\">\n          <div class=\"card-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          <h3 class=\"card-title\">G0${index}</h3>\n        </div>\n      </li>\n    </ul>\n  </div>\n</div>"
+};
+
+ThemesOthers = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1 class=\"underline\">其他<small>Others</small></h1>\n    <ul class=\"card-list\">\n      <li class=\"list-item\" v-for=\"index in 6\" :key=\"index\">\n        <div class=\"item-wrapper\">\n          <div class=\"card-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          <h3 class=\"card-title\">O0${index}</h3>\n        </div>\n      </li>\n    </ul>\n  </div>\n</div>"
+};
+
+ThemesRSVP = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1 class=\"underline\">回函卡<small>RSVP</small></h1>\n    <ul class=\"card-list\">\n      <li class=\"list-item\" v-for=\"index in 6\" :key=\"index\">\n        <div class=\"item-wrapper\">\n          <div class=\"card-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          <h3 class=\"card-title\">R0${index}</h3>\n        </div>\n      </li>\n    </ul>\n  </div>\n</div>"
+};
+
+ThemesSeatingCard = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1 class=\"underline\">座位卡<small>Seating Card</small></h1>\n    <ul class=\"card-list\">\n      <li class=\"list-item\" v-for=\"index in 6\" :key=\"index\">\n        <div class=\"item-wrapper\">\n          <div class=\"card-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          <h3 class=\"card-title\">S0${index}</h3>\n        </div>\n      </li>\n    </ul>\n  </div>\n</div>"
+};
+
+ThemesThankYouCard = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1 class=\"underline\">感謝卡<small>Thank you Card</small></h1>\n    <ul class=\"card-list\">\n      <li class=\"list-item\" v-for=\"index in 6\" :key=\"index\">\n        <div class=\"item-wrapper\">\n          <div class=\"card-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          <h3 class=\"card-title\">T0${index}</h3>\n        </div>\n      </li>\n    </ul>\n  </div>\n</div>"
+};
+
+ThemesWeddingCard = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1 class=\"underline\">喜帖<small>Wedding Card</small></h1>\n    <ul class=\"card-list\">\n      <li class=\"list-item\" v-for=\"index in 6\" :key=\"index\">\n        <div class=\"item-wrapper\">\n          <div class=\"card-image\" :style=\"{ backgroundImage: 'url(http://placehold.jp/600x600.png)' }\"></div>\n          <h3 class=\"card-title\">W0${index}</h3>\n        </div>\n      </li>\n    </ul>\n  </div>\n</div>"
 };
 
 routes = [
@@ -156,8 +217,40 @@ routes = [
         component: About
       }, {
         path: 'themes',
-        name: 'themes',
-        component: Themes
+        component: {
+          template: '<router-view></router-view>'
+        },
+        children: [
+          {
+            path: '',
+            name: 'themes',
+            component: Themes
+          }, {
+            path: 'wedding-card',
+            name: 'theme_wedding_card',
+            component: ThemesWeddingCard
+          }, {
+            path: 'rsvp',
+            name: 'theme_rsvp',
+            component: ThemesRSVP
+          }, {
+            path: 'thank-you-card',
+            name: 'theme_thank_you_card',
+            component: ThemesThankYouCard
+          }, {
+            path: 'seating-card',
+            name: 'theme_seating_card',
+            component: ThemesSeatingCard
+          }, {
+            path: 'gift-card',
+            name: 'theme_gift_card',
+            component: ThemesGiftCard
+          }, {
+            path: 'gift-others',
+            name: 'theme_others',
+            component: ThemesOthers
+          }
+        ]
       }, {
         path: 'faq',
         name: 'faq',
@@ -201,12 +294,6 @@ app = new Vue({
         }
       }
     }
-  },
-  data: function() {
-    return {};
-  },
-  mounted: function() {
-    return xx('app mounted');
   },
   created: function() {
     return window.addEventListener('scroll', this.handle_scroll);

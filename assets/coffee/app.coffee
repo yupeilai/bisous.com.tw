@@ -19,13 +19,6 @@ app = new Vue({
         if jQuery('#header').hasClass 'sticky'
           jQuery('#header').removeClass 'sticky'
 
-  data: ->
-    {
-    }
-
-  mounted: ->
-    xx 'app mounted'
-
   created: ->
     window.addEventListener 'scroll', this.handle_scroll
 

@@ -7,7 +7,19 @@ routes = [
       { path: '', name: 'home', component: Home }
       { path: 'generator', name: 'generator', component: Generator }
       { path: 'about', name: 'about', component: About }
-      { path: 'themes', name: 'themes', component: Themes }
+      {
+        path: 'themes'
+        component: template: '<router-view></router-view>'
+        children: [
+          { path: '', name: 'themes', component: Themes }
+          { path: 'wedding-card', name: 'theme_wedding_card', component: ThemesWeddingCard }
+          { path: 'rsvp', name: 'theme_rsvp', component: ThemesRSVP }
+          { path: 'thank-you-card', name: 'theme_thank_you_card', component: ThemesThankYouCard }
+          { path: 'seating-card', name: 'theme_seating_card', component: ThemesSeatingCard }
+          { path: 'gift-card', name: 'theme_gift_card', component: ThemesGiftCard }
+          { path: 'gift-others', name: 'theme_others', component: ThemesOthers }
+        ]
+      }
       { path: 'faq', name: 'faq', component: FAQ }
       { path: 'cart', name: 'cart', component: Cart }
       # {
