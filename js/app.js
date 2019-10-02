@@ -1,4 +1,4 @@
-var About, Cart, DEBUG, FAQ, Generator, Home, Themes, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
+var About, Cart, DEBUG, Error404, FAQ, Generator, Home, Themes, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
 
 DEBUG = true;
 
@@ -149,11 +149,15 @@ Vue.component('page-header', {
 });
 
 About = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>About</h1>\n    <p>食西做務業動市不？為自人還為原；門住營不黨來教香輪聲因術水著有表微能遊找中了方聞房星怕理益成工如沒達：自請唱去股技中業星沒狀；在能書朋對問文我他區院那和氣進德前事推教。如媽要的反改這這筆味？成加進之此系沒明又然，造教最奇上兩為，希清易人了多就自坐在親復在管打國會是告的近！皮河起嚴：新更評信己就究之信期、球人法無見精以只的因：展一詩。開才發間可專臺於在指畫親民步只人員期北子：的是熱！心可大來！教車線友幾親。愛開好走上不聲明，一受容集老人兒打士明該、輕公學傳意部在社者來該說，職求是，事不的素國，有不大著常於器機廣洲例。家多我政來木看電上深成家造臉，元斷自續整？接常事術參反族中北一。嚴成道華以感為。時到少可兩：事然當結訴注經一度陽。</p>\n\n    <p>食西做務業動市不？為自人還為原；門住營不黨來教香輪聲因術水著有表微能遊找中了方聞房星怕理益成工如沒達：自請唱去股技中業星沒狀；在能書朋對問文我他區院那和氣進德前事推教。如媽要的反改這這筆味？成加進之此系沒明又然，造教最奇上兩為，希清易人了多就自坐在親復在管打國會是告的近！皮河起嚴：新更評信己就究之信期、球人法無見精以只的因：展一詩。開才發間可專臺於在指畫親民步只人員期北子：的是熱！心可大來！教車線友幾親。愛開好走上不聲明，一受容集老人兒打士明該、輕公學傳意部在社者來該說，職求是，事不的素國，有不大著常於器機廣洲例。家多我政來木看電上深成家造臉，元斷自續整？接常事術參反族中北一。嚴成道華以感為。時到少可兩：事然當結訴注經一度陽。</p>\n  </div>\n</div>"
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>關於我們<small>About</small></h1>\n    <h3 class=\"underline\">聯繫方式</h3>\n    <p>\n      ．客服信箱：<a href=\"mailto:info@bisous.com.tw\">info@bisous.com.tw</a><br />\n      ．臉書粉絲團\n    </p>\n  </div>\n</div>"
 };
 
 Cart = {
   template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Cart</h1>\n    <p>jotForm here</p>\n  </div>\n</div>"
+};
+
+Error404 = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Page Cannot Be Found</h1>\n    <p>If you are an existing user and are looking for account or theme info, please submit a message to us here.</p>\n  </div>\n</div>"
 };
 
 FAQ = {
@@ -259,6 +263,10 @@ routes = [
         path: 'cart',
         name: 'cart',
         component: Cart
+      }, {
+        path: '*',
+        name: 'error404',
+        component: Error404
       }
     ]
   }

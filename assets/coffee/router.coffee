@@ -22,16 +22,7 @@ routes = [
       }
       { path: 'faq', name: 'faq', component: FAQ }
       { path: 'cart', name: 'cart', component: Cart }
-      # {
-      #   path: '*'
-      #   component:
-      #     template: '<component v-bind:is="page_template"></component>'
-      #     data: ->
-      #       {
-      #         page_template: 'page-not-found'
-      #       }
-      #     mounted: -> @$parent.loading = false
-      # }
+      { path: '*', name: 'error404', component: Error404 }
     ]
   }
 ]
