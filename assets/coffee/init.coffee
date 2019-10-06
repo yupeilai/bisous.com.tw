@@ -42,6 +42,11 @@ refreshOGData = (url) ->
       scrape: 'true'
     dataType: 'json'
 
+nl2br = (string) ->
+  if typeof string == 'undefined' or string == null then return ''
+  string = (string + '').replace /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</div><div>$2'
+  string = '<div>' + string + '</div>'
+
 
 #==========================================
 # Browser check
@@ -69,7 +74,7 @@ isMobileChrome = ->
 #==============================================================
 # Font
 #==============================================================
-append_font = (font, callback) ->
+appendFont = (font, callback) ->
   link = document.createElement('link')
   link.setAttribute 'rel', 'stylesheet'
   link.setAttribute 'type', 'text/css'
@@ -78,6 +83,13 @@ append_font = (font, callback) ->
       success: -> callback()
   link.setAttribute 'href', '/fonts/' + font + '/font.css?v=1.0'
   document.getElementsByTagName('head')[0].appendChild link
+
+
+#==============================================================
+# HTML encode
+#==============================================================
+htmlEncode = (value) -> jQuery('<div/>').text(value).html()
+htmlDecode = (value) -> jQuery('<div/>').html(value).text()
 
 
 #==========================================

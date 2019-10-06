@@ -1,4 +1,5 @@
 #=require init.coffee
+#=require mixin.coffee
 #=require component/*.coffee
 #=require pages/*.coffee
 #=require router.coffee

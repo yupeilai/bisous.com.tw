@@ -26,7 +26,7 @@ Generator =
                   <div class="date" ref="date" v-text="date"></div>
                   <div class="time" ref="time" v-text="time"></div>
                   <div class="location" ref="location" v-text="location"></div>
-                  <div class="address" ref="address" v-text="address"></div>
+                  <div class="address" ref="address" v-html="nl2br(htmlEncode(address))"></div>
                 </div>
               </div>
             </div>
@@ -35,14 +35,24 @@ Generator =
                 <div class="form-group">
                   <h3 v-text="'結婚人'"></h3>
                   <input type="text" ref="mate_1_input" v-model="mate_1_input" v-on:focus="$event.target.select()" />
+                </div>
+                <div class="form-group">
                   <h3 v-text="'結婚人'"></h3>
                   <input type="text" ref="mate_2_input" v-model="mate_2_input" v-on:focus="$event.target.select()" />
+                </div>
+                <div class="form-group">
                   <h3 v-text="'日期'"></h3>
                   <input type="text" ref="date_input" v-model="date_input" v-on:focus="$event.target.select()" />
+                </div>
+                <div class="form-group">
                   <h3 v-text="'時間'"></h3>
                   <input type="text" ref="time_input" v-model="time_input" v-on:focus="$event.target.select()" />
+                </div>
+                <div class="form-group">
                   <h3 v-text="'地點'"></h3>
                   <input type="text" ref="location_input" v-model="location_input" v-on:focus="$event.target.select()" />
+                </div>
+                <div class="form-group">
                   <h3 v-text="'地址/電話'"></h3>
                   <textarea ref="address_input" v-model="address_input" v-on:focus="$event.target.select()" /></textarea>
                 </div>
@@ -90,7 +100,7 @@ Generator =
     }
 
   beforeMount: ->
-    append_font 'Ramland', @generate_preview
+    appendFont 'Ramland', @generate_preview
     @mate_1 = @mate_1_default
     @mate_2 = @mate_2_default
     @date = @date_default

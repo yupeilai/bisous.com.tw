@@ -1,4 +1,4 @@
-var About, Cart, DEBUG, Error404, FAQ, FAQ1, FAQ2, FAQ3, Generator, Home, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, append_font, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
+var About, Cart, DEBUG, Error404, FAQ, FAQ1, FAQ2, FAQ3, Generator, Home, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, appendFont, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, htmlDecode, htmlEncode, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, nl2br, refreshOGData, router, routes, scrollTop, xx;
 
 DEBUG = true;
 
@@ -53,6 +53,14 @@ refreshOGData = function(url) {
   });
 };
 
+nl2br = function(string) {
+  if (typeof string === 'undefined' || string === null) {
+    return '';
+  }
+  string = (string + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</div><div>$2');
+  return string = '<div>' + string + '</div>';
+};
+
 isMobile = function() {
   if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/BlackBerry/)) {
     return true;
@@ -95,7 +103,7 @@ isMobileChrome = function() {
   }
 };
 
-append_font = function(font, callback) {
+appendFont = function(font, callback) {
   var link;
   link = document.createElement('link');
   link.setAttribute('rel', 'stylesheet');
@@ -111,9 +119,28 @@ append_font = function(font, callback) {
   return document.getElementsByTagName('head')[0].appendChild(link);
 };
 
+htmlEncode = function(value) {
+  return jQuery('<div/>').text(value).html();
+};
+
+htmlDecode = function(value) {
+  return jQuery('<div/>').html(value).text();
+};
+
 window.onload = function() {
   return jQuery('body').addClass('loaded');
 };
+
+Vue.mixin({
+  methods: {
+    nl2br: function(text) {
+      return nl2br(text);
+    },
+    htmlEncode: function(value) {
+      return htmlEncode(value);
+    }
+  }
+});
 
 Vue.component('hero', {
   template: "<div id=\"hero\">\n  <div id=\"hero-overlay\"></div>\n  <div class=\"wrapper\">\n    <div id=\"hero-content\">\n      <div>\n        <h1>喜帖產生器</h1>\n        <h4>創造出屬於你/妳的喜帖</h4>\n        <router-link :to=\"{name: 'generator'}\" class=\"button outlined-white\">Try it</router-link>\n      </div>\n    </div>\n  </div>\n</div>"
@@ -193,7 +220,7 @@ FAQ3 = {
 };
 
 Generator = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"basemap_image\" :src=\"basemap_image\" />\n            <div :class=\"['text-wrapper', template]\">\n              <div class=\"mate_1\" ref=\"mate_1\" v-text=\"mate_1\"></div>\n              <div class=\"mate_2\" ref=\"mate_2\" v-text=\"mate_2\"></div>\n              <div class=\"date\" ref=\"date\" v-text=\"date\"></div>\n              <div class=\"time\" ref=\"time\" v-text=\"time\"></div>\n              <div class=\"location\" ref=\"location\" v-text=\"location\"></div>\n              <div class=\"address\" ref=\"address\" v-text=\"address\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_1_input\" v-model=\"mate_1_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_2_input\" v-model=\"mate_2_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"date_input\" v-model=\"date_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"time_input\" v-model=\"time_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"location_input\" v-model=\"location_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"address_input\" v-model=\"address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"basemap_image\" :src=\"basemap_image\" />\n            <div :class=\"['text-wrapper', template]\">\n              <div class=\"mate_1\" ref=\"mate_1\" v-text=\"mate_1\"></div>\n              <div class=\"mate_2\" ref=\"mate_2\" v-text=\"mate_2\"></div>\n              <div class=\"date\" ref=\"date\" v-text=\"date\"></div>\n              <div class=\"time\" ref=\"time\" v-text=\"time\"></div>\n              <div class=\"location\" ref=\"location\" v-text=\"location\"></div>\n              <div class=\"address\" ref=\"address\" v-html=\"nl2br(htmlEncode(address))\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_1_input\" v-model=\"mate_1_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_2_input\" v-model=\"mate_2_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"date_input\" v-model=\"date_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"time_input\" v-model=\"time_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"location_input\" v-model=\"location_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"address_input\" v-model=\"address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
   data: function() {
     return {
       basemap_image: '/images/generator/01.png',
@@ -222,7 +249,7 @@ Generator = {
     };
   },
   beforeMount: function() {
-    append_font('Ramland', this.generate_preview);
+    appendFont('Ramland', this.generate_preview);
     this.mate_1 = this.mate_1_default;
     this.mate_2 = this.mate_2_default;
     this.date = this.date_default;
