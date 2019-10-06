@@ -161,7 +161,7 @@ Vue.component('home-themes', {
 });
 
 Vue.component('page-header', {
-  template: "<header id=\"header\" class=\"\">\n  <div class=\"wrapper\">\n    <div id=\"header-brand\">\n      <router-link :to=\"{name: 'home'}\"></router-link>\n    </div>\n    <div id=\"header-nav\">\n      <ul>\n        <li>\n          <router-link :to=\"{name: 'about'}\">About</router-link>\n        </li>\n        <li>\n          <a href=\"#\">Themes</a>\n          <ul class=\"sub-nav\">\n            <li><router-link :to=\"{name: 'theme_wedding_card'}\">喜帖</router-link></li>\n            <li><router-link :to=\"{name: 'theme_rsvp'}\">回函卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_thank_you_card'}\">感謝卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_seating_card'}\">座位卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_gift_card'}\">禮物小卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_others'}\">其他</router-link></li>\n          </ul>\n        </li>\n        <li>\n          <a href=\"#\">FAQ</a>\n          <ul class=\"sub-nav\">\n            <li><router-link :to=\"{name: 'faq_1'}\">計價方式與優惠</router-link></li>\n            <li><router-link :to=\"{name: 'faq_2'}\">下單流程與交期</router-link></li>\n            <li><router-link :to=\"{name: 'faq_3'}\">常見問題</router-link></li>\n          </ul>\n        </li>\n      </ul>\n    </div>\n    <div id=\"header-cart\">\n      <router-link :to=\"{name: 'cart'}\">Cart</router-link>\n    </div>\n  </div>\n</header>"
+  template: "<header id=\"header\" class=\"\">\n  <div class=\"wrapper\">\n    <div id=\"header-brand\">\n      <router-link :to=\"{name: 'home'}\"></router-link>\n    </div>\n    <div id=\"header-nav\">\n      <ul>\n        <li>\n          <router-link :to=\"{name: 'about'}\">About</router-link>\n        </li>\n        <li>\n          <router-link :to=\"{name: 'generator'}\">Generator</router-link>\n        </li>\n        <li>\n          <a href=\"#\">Themes</a>\n          <ul class=\"sub-nav\">\n            <li><router-link :to=\"{name: 'theme_wedding_card'}\">喜帖</router-link></li>\n            <li><router-link :to=\"{name: 'theme_rsvp'}\">回函卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_thank_you_card'}\">感謝卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_seating_card'}\">座位卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_gift_card'}\">禮物小卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_others'}\">其他</router-link></li>\n          </ul>\n        </li>\n        <li>\n          <a href=\"#\">FAQ</a>\n          <ul class=\"sub-nav\">\n            <li><router-link :to=\"{name: 'faq_1'}\">計價方式與優惠</router-link></li>\n            <li><router-link :to=\"{name: 'faq_2'}\">下單流程與交期</router-link></li>\n            <li><router-link :to=\"{name: 'faq_3'}\">常見問題</router-link></li>\n          </ul>\n        </li>\n      </ul>\n    </div>\n    <div id=\"header-cart\">\n      <router-link :to=\"{name: 'cart'}\">Cart</router-link>\n    </div>\n  </div>\n</header>"
 });
 
 About = {
@@ -193,35 +193,30 @@ FAQ3 = {
 };
 
 Generator = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"basemap_image\" :src=\"basemap_image\" />\n            <div class=\"text-wrapper\">\n              <div class=\"mate_1\" ref=\"mate_1\" :style=\"{ color: mate_1_color }\" v-text=\"mate_1\"></div>\n              <div class=\"mate_2\" ref=\"mate_2\" :style=\"{ color: mate_2_color }\" v-text=\"mate_2\"></div>\n              <div class=\"date\" ref=\"date\" :style=\"{ color: date_color }\" v-text=\"date\"></div>\n              <div class=\"time\" ref=\"time\" :style=\"{ color: time_color }\" v-text=\"time\"></div>\n              <div class=\"location\" ref=\"location\" :style=\"{ color: location_color }\" v-text=\"location\"></div>\n              <div class=\"address\" ref=\"address\" :style=\"{ color: address_color }\" v-text=\"address\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_1_input\" v-model=\"mate_1_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_2_input\" v-model=\"mate_2_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"date_input\" v-model=\"date_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"time_input\" v-model=\"time_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"location_input\" v-model=\"location_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"address_input\" v-model=\"address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"basemap_image\" :src=\"basemap_image\" />\n            <div :class=\"['text-wrapper', template]\">\n              <div class=\"mate_1\" ref=\"mate_1\" v-text=\"mate_1\"></div>\n              <div class=\"mate_2\" ref=\"mate_2\" v-text=\"mate_2\"></div>\n              <div class=\"date\" ref=\"date\" v-text=\"date\"></div>\n              <div class=\"time\" ref=\"time\" v-text=\"time\"></div>\n              <div class=\"location\" ref=\"location\" v-text=\"location\"></div>\n              <div class=\"address\" ref=\"address\" v-text=\"address\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_1_input\" v-model=\"mate_1_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_2_input\" v-model=\"mate_2_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"date_input\" v-model=\"date_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"time_input\" v-model=\"time_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"location_input\" v-model=\"location_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"address_input\" v-model=\"address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
   data: function() {
     return {
       basemap_image: '/images/generator/01.png',
       preview_image: '/images/generator/01.png',
+      template: 'template_01',
       mate_1: '',
       mate_1_default: 'Bisous',
       mate_1_input: 'Bisous',
-      mate_1_color: '#000000',
       mate_2: '',
       mate_2_default: 'Yellowhite',
       mate_2_input: 'Yellowhite',
-      mate_2_color: '#000000',
       date: '',
       date_default: 'MONDAY, SEPTEMBER 30TH, 2019',
       date_input: 'MONDAY, SEPTEMBER 30TH, 2019',
-      date_color: '#000000',
       time: '',
       time_default: 'AT 3:30, IN THE AFTERNOON',
       time_input: 'AT 3:30, IN THE AFTERNOON',
-      time_color: '#000000',
       location: '',
-      location_default: 'Bisous',
-      location_input: 'Bisous',
-      location_color: '#000000',
+      location_default: 'BISOUS',
+      location_input: 'BISOUS',
       address: '',
-      address_default: 'www.bisous.com.tw',
-      address_input: 'www.bisous.com.tw',
-      address_color: '#000000',
+      address_default: 'WWW.BISOUS.COM.TW',
+      address_input: 'WWW.BISOUS.COM.TW',
       initialed: false,
       loading_preview: false
     };

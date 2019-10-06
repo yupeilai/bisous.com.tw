@@ -20,13 +20,13 @@ Generator =
               </div>
               <div id="output_container">
                 <img ref="basemap_image" :src="basemap_image" />
-                <div class="text-wrapper">
-                  <div class="mate_1" ref="mate_1" :style="{ color: mate_1_color }" v-text="mate_1"></div>
-                  <div class="mate_2" ref="mate_2" :style="{ color: mate_2_color }" v-text="mate_2"></div>
-                  <div class="date" ref="date" :style="{ color: date_color }" v-text="date"></div>
-                  <div class="time" ref="time" :style="{ color: time_color }" v-text="time"></div>
-                  <div class="location" ref="location" :style="{ color: location_color }" v-text="location"></div>
-                  <div class="address" ref="address" :style="{ color: address_color }" v-text="address"></div>
+                <div :class="['text-wrapper', template]">
+                  <div class="mate_1" ref="mate_1" v-text="mate_1"></div>
+                  <div class="mate_2" ref="mate_2" v-text="mate_2"></div>
+                  <div class="date" ref="date" v-text="date"></div>
+                  <div class="time" ref="time" v-text="time"></div>
+                  <div class="location" ref="location" v-text="location"></div>
+                  <div class="address" ref="address" v-text="address"></div>
                 </div>
               </div>
             </div>
@@ -59,35 +59,31 @@ Generator =
       basemap_image: '/images/generator/01.png'
       preview_image: '/images/generator/01.png'
 
+      template: 'template_01'
+
       mate_1: ''
       mate_1_default: 'Bisous'
       mate_1_input: 'Bisous'
-      mate_1_color: '#000000'
 
       mate_2: ''
       mate_2_default: 'Yellowhite'
       mate_2_input: 'Yellowhite'
-      mate_2_color: '#000000'
 
       date: ''
       date_default: 'MONDAY, SEPTEMBER 30TH, 2019'
       date_input: 'MONDAY, SEPTEMBER 30TH, 2019'
-      date_color: '#000000'
 
       time: ''
       time_default: 'AT 3:30, IN THE AFTERNOON'
       time_input: 'AT 3:30, IN THE AFTERNOON'
-      time_color: '#000000'
 
       location: ''
-      location_default: 'Bisous'
-      location_input: 'Bisous'
-      location_color: '#000000'
+      location_default: 'BISOUS'
+      location_input: 'BISOUS'
 
       address: ''
-      address_default: 'www.bisous.com.tw'
-      address_input: 'www.bisous.com.tw'
-      address_color: '#000000'
+      address_default: 'WWW.BISOUS.COM.TW'
+      address_input: 'WWW.BISOUS.COM.TW'
 
       initialed: false
       loading_preview: false

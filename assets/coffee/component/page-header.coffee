@@ -11,6 +11,9 @@ Vue.component 'page-header',
               <router-link :to="{name: 'about'}">About</router-link>
             </li>
             <li>
+              <router-link :to="{name: 'generator'}">Generator</router-link>
+            </li>
+            <li>
               <a href="#">Themes</a>
               <ul class="sub-nav">
                 <li><router-link :to="{name: 'theme_wedding_card'}">喜帖</router-link></li>
