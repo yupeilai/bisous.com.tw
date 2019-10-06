@@ -1,0 +1,12 @@
+/* Webfont: Ramland */@font-face {
+    font-family: 'Ramland';
+    src: url('/fonts/Ramland/Ramland.eot'); /* IE9 Compat Modes */
+    src: url('/fonts/Ramland/Ramland.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/fonts/Ramland/Ramland.woff') format('woff'), /* Modern Browsers */
+         url('/fonts/Ramland/Ramland.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('/fonts/Ramland/Ramland.svg#Ramland') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

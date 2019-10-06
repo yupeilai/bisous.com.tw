@@ -27,5 +27,45 @@ a
   &:visited
     color: $link-visited-color
 
+input[type=text]
+input[type=email]
+textarea
+  position relative
+  width 100%
+  padding 15px
+  font-size 1.2rem
+  outline none
+  box-sizing border-box
+  transition border .3s
+  border 0
+  background $color-white
+  border 2px solid $color-gray
+  -webkit-appearance none
+  &:focus
+    border-color darken($color-black, 10%)
+  &.half-size
+    width 50%
+  &.is-danger
+    border-color $color-red
+  & + input[type=text]
+  & + input[type=email]
+  & + textarea
+    margin-top 16px
+
+input[type=text]
+input[type=email]
+  border-radius 8888px
+
+textarea
+  border-radius 20px
+  height 100px
+  resize none
+
+button::-moz-focus-inner
+  border 0
+
+button:focus
+  outline none
+
 #page
   height 100%

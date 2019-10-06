@@ -1,4 +1,4 @@
-var About, Cart, DEBUG, Error404, FAQ, FAQ1, FAQ2, FAQ3, Generator, Home, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
+var About, Cart, DEBUG, Error404, FAQ, FAQ1, FAQ2, FAQ3, Generator, Home, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, append_font, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
 
 DEBUG = true;
 
@@ -95,6 +95,22 @@ isMobileChrome = function() {
   }
 };
 
+append_font = function(font, callback) {
+  var link;
+  link = document.createElement('link');
+  link.setAttribute('rel', 'stylesheet');
+  link.setAttribute('type', 'text/css');
+  link.onload = function() {
+    return FontFaceOnload(font, {
+      success: function() {
+        return callback();
+      }
+    });
+  };
+  link.setAttribute('href', '/fonts/' + font + '/font.css?v=1.0');
+  return document.getElementsByTagName('head')[0].appendChild(link);
+};
+
 window.onload = function() {
   return jQuery('body').addClass('loaded');
 };
@@ -177,7 +193,153 @@ FAQ3 = {
 };
 
 Generator = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Generator</h1>\n  </div>\n</div>"
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"basemap_image\" :src=\"basemap_image\" />\n            <div class=\"text-wrapper\">\n              <div class=\"mate_1\" ref=\"mate_1\" :style=\"{ color: mate_1_color }\" v-text=\"mate_1\"></div>\n              <div class=\"mate_2\" ref=\"mate_2\" :style=\"{ color: mate_2_color }\" v-text=\"mate_2\"></div>\n              <div class=\"date\" ref=\"date\" :style=\"{ color: date_color }\" v-text=\"date\"></div>\n              <div class=\"time\" ref=\"time\" :style=\"{ color: time_color }\" v-text=\"time\"></div>\n              <div class=\"location\" ref=\"location\" :style=\"{ color: location_color }\" v-text=\"location\"></div>\n              <div class=\"address\" ref=\"address\" :style=\"{ color: address_color }\" v-text=\"address\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_1_input\" v-model=\"mate_1_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_2_input\" v-model=\"mate_2_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"date_input\" v-model=\"date_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"time_input\" v-model=\"time_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"location_input\" v-model=\"location_input\" v-on:focus=\"$event.target.select()\" />\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"address_input\" v-model=\"address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
+  data: function() {
+    return {
+      basemap_image: '/images/generator/01.png',
+      preview_image: '/images/generator/01.png',
+      mate_1: '',
+      mate_1_default: 'Bisous',
+      mate_1_input: 'Bisous',
+      mate_1_color: '#000000',
+      mate_2: '',
+      mate_2_default: 'Yellowhite',
+      mate_2_input: 'Yellowhite',
+      mate_2_color: '#000000',
+      date: '',
+      date_default: 'MONDAY, SEPTEMBER 30TH, 2019',
+      date_input: 'MONDAY, SEPTEMBER 30TH, 2019',
+      date_color: '#000000',
+      time: '',
+      time_default: 'AT 3:30, IN THE AFTERNOON',
+      time_input: 'AT 3:30, IN THE AFTERNOON',
+      time_color: '#000000',
+      location: '',
+      location_default: 'Bisous',
+      location_input: 'Bisous',
+      location_color: '#000000',
+      address: '',
+      address_default: 'www.bisous.com.tw',
+      address_input: 'www.bisous.com.tw',
+      address_color: '#000000',
+      initialed: false,
+      loading_preview: false
+    };
+  },
+  beforeMount: function() {
+    append_font('Ramland', this.generate_preview);
+    this.mate_1 = this.mate_1_default;
+    this.mate_2 = this.mate_2_default;
+    this.date = this.date_default;
+    this.time = this.time_default;
+    this.location = this.location_default;
+    return this.address = this.address_default;
+  },
+  mounted: function() {
+    this.generate_preview();
+    return this.initialed = true;
+  },
+  methods: {
+    generate_preview: function() {
+      this.loading_preview = true;
+      return this.create_preview_image();
+    },
+    generator: function(action) {
+      this.output_action = action;
+      return this.prepare_generator();
+    },
+    prepare_generator: function() {
+      gogo.start();
+      this.show_social_share_popup();
+      return this.create_image_html2canvas();
+    },
+    create_preview_image: function() {
+      return setTimeout((function() {
+        var self;
+        if (jQuery('#output_container').length > 0) {
+          self = this;
+          return html2canvas(document.querySelector('#output_container'), {
+            scale: 1,
+            logging: false,
+            backgroundColor: null
+          }).then(function(canvas) {
+            var output;
+            output = canvas.toDataURL('image/png');
+            if (typeof self.preview_image !== 'undefined') {
+              return self.preview_image = output;
+            }
+          })["catch"](function(error) {
+            return xx(error);
+          });
+        }
+      }).bind(this), 500);
+    }
+  },
+  watch: {
+    mate_1_input: function(value) {
+      return this.mate_1 = value === '' ? this.mate_1_default : value;
+    },
+    mate_1: function(value) {
+      if (this.initialed) {
+        return this.$nextTick(function() {
+          return this.generate_preview();
+        });
+      }
+    },
+    mate_2_input: function(value) {
+      return this.mate_2 = value === '' ? this.mate_2_default : value;
+    },
+    mate_2: function(value) {
+      if (this.initialed) {
+        return this.$nextTick(function() {
+          return this.generate_preview();
+        });
+      }
+    },
+    date_input: function(value) {
+      return this.date = value === '' ? this.date_default : value;
+    },
+    date: function(value) {
+      if (this.initialed) {
+        return this.$nextTick(function() {
+          return this.generate_preview();
+        });
+      }
+    },
+    time_input: function(value) {
+      return this.time = value === '' ? this.time_default : value;
+    },
+    time: function(value) {
+      if (this.initialed) {
+        return this.$nextTick(function() {
+          return this.generate_preview();
+        });
+      }
+    },
+    location_input: function(value) {
+      return this.location = value === '' ? this.location_default : value;
+    },
+    location: function(value) {
+      if (this.initialed) {
+        return this.$nextTick(function() {
+          return this.generate_preview();
+        });
+      }
+    },
+    address_input: function(value) {
+      return this.address = value === '' ? this.address_default : value;
+    },
+    address: function(value) {
+      if (this.initialed) {
+        return this.$nextTick(function() {
+          return this.generate_preview();
+        });
+      }
+    },
+    preview_image: function(value) {
+      return this.loading_preview = false;
+    }
+  }
 };
 
 Home = {

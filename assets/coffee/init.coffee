@@ -66,6 +66,20 @@ isMobileChrome = ->
   return if navigator.userAgent.match('CriOS') then true else false
 
 
+#==============================================================
+# Font
+#==============================================================
+append_font = (font, callback) ->
+  link = document.createElement('link')
+  link.setAttribute 'rel', 'stylesheet'
+  link.setAttribute 'type', 'text/css'
+  link.onload = ->
+    FontFaceOnload font,
+      success: -> callback()
+  link.setAttribute 'href', '/fonts/' + font + '/font.css?v=1.0'
+  document.getElementsByTagName('head')[0].appendChild link
+
+
 #==========================================
 # Events
 #==========================================
