@@ -28,6 +28,8 @@ $header-height-sticky = 60px
     #header-nav li a
     #header-cart a
       color $global-text-color !important
+    #header-nav li a:after
+      background $global-text-color !important
 
   #header-brand
     display block
@@ -42,7 +44,7 @@ $header-height-sticky = 60px
       background-repeat no-repeat
       background-position center center
       background-size contain
-      transition height .3s linear
+      transition height .1s linear
       .home &
         background-image url('/images/logo-white.png')
 
@@ -65,10 +67,25 @@ $header-height-sticky = 60px
         margin-left 0
       &:last-child
         margin-right 0
+      a
+        position relative
+        &:hover:after
+          width 100%
+        &:after
+          background $global-text-color
+          bottom -2px
+          content ""
+          height 3px
+          left 0
+          position absolute
+          transition width .5s
+          width 0
 
     .home &
       li a
         color #FFFFFF
+        &:after
+          background #FFFFFF
 
   #header-cart
     flex 1
