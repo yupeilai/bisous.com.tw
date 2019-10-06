@@ -11,16 +11,23 @@ routes = [
         path: 'themes'
         component: template: '<router-view></router-view>'
         children: [
-          { path: '', name: 'themes', component: Themes }
           { path: 'wedding-card', name: 'theme_wedding_card', component: ThemesWeddingCard }
           { path: 'rsvp', name: 'theme_rsvp', component: ThemesRSVP }
           { path: 'thank-you-card', name: 'theme_thank_you_card', component: ThemesThankYouCard }
           { path: 'seating-card', name: 'theme_seating_card', component: ThemesSeatingCard }
           { path: 'gift-card', name: 'theme_gift_card', component: ThemesGiftCard }
-          { path: 'gift-others', name: 'theme_others', component: ThemesOthers }
+          { path: 'others', name: 'theme_others', component: ThemesOthers }
         ]
       }
-      { path: 'faq', name: 'faq', component: FAQ }
+      {
+        path: 'faq'
+        component: template: '<router-view></router-view>'
+        children: [
+          { path: 'faq-1', name: 'faq_1', component: FAQ1 }
+          { path: 'faq-2', name: 'faq_2', component: FAQ2 }
+          { path: 'faq-3', name: 'faq_3', component: FAQ3 }
+        ]
+      }
       { path: 'cart', name: 'cart', component: Cart }
       { path: '*', name: 'error404', component: Error404 }
     ]

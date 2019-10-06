@@ -1,4 +1,4 @@
-var About, Cart, DEBUG, Error404, FAQ, Generator, Home, Themes, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
+var About, Cart, DEBUG, Error404, FAQ, FAQ1, FAQ2, FAQ3, Generator, Home, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, detectBrowserLang, detectInFBApp, float, focusFirstInput, headerTo, isAndroid, isFirefox, isIE, isMobile, isMobileChrome, isSafari, refreshOGData, router, routes, scrollTop, xx;
 
 DEBUG = true;
 
@@ -145,7 +145,7 @@ Vue.component('home-themes', {
 });
 
 Vue.component('page-header', {
-  template: "<header id=\"header\" class=\"\">\n  <div class=\"wrapper\">\n    <div id=\"header-brand\">\n      <router-link :to=\"{name: 'home'}\"></router-link>\n    </div>\n    <div id=\"header-nav\">\n      <ul>\n        <li>\n          <router-link :to=\"{name: 'about'}\">About</router-link>\n        </li>\n        <li>\n          <router-link :to=\"{name: 'themes'}\">Themes</router-link>\n        </li>\n        <li>\n          <router-link :to=\"{name: 'faq'}\">FAQ</router-link>\n        </li>\n      </ul>\n    </div>\n    <div id=\"header-cart\">\n      <router-link :to=\"{name: 'cart'}\">Cart</router-link>\n    </div>\n  </div>\n</header>"
+  template: "<header id=\"header\" class=\"\">\n  <div class=\"wrapper\">\n    <div id=\"header-brand\">\n      <router-link :to=\"{name: 'home'}\"></router-link>\n    </div>\n    <div id=\"header-nav\">\n      <ul>\n        <li>\n          <router-link :to=\"{name: 'about'}\">About</router-link>\n        </li>\n        <li>\n          <a href=\"#\">Themes</a>\n          <ul class=\"sub-nav\">\n            <li><router-link :to=\"{name: 'theme_wedding_card'}\">喜帖</router-link></li>\n            <li><router-link :to=\"{name: 'theme_rsvp'}\">回函卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_thank_you_card'}\">感謝卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_seating_card'}\">座位卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_gift_card'}\">禮物小卡</router-link></li>\n            <li><router-link :to=\"{name: 'theme_others'}\">其他</router-link></li>\n          </ul>\n        </li>\n        <li>\n          <a href=\"#\">FAQ</a>\n          <ul class=\"sub-nav\">\n            <li><router-link :to=\"{name: 'faq_1'}\">計價方式與優惠</router-link></li>\n            <li><router-link :to=\"{name: 'faq_2'}\">下單流程與交期</router-link></li>\n            <li><router-link :to=\"{name: 'faq_3'}\">常見問題</router-link></li>\n          </ul>\n        </li>\n      </ul>\n    </div>\n    <div id=\"header-cart\">\n      <router-link :to=\"{name: 'cart'}\">Cart</router-link>\n    </div>\n  </div>\n</header>"
 });
 
 About = {
@@ -164,16 +164,24 @@ FAQ = {
   template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>FAQ</h1>\n    <p>食西做務業動市不？為自人還為原；門住營不黨來教香輪聲因術水著有表微能遊找中了方聞房星怕理益成工如沒達：自請唱去股技中業星沒狀；在能書朋對問文我他區院那和氣進德前事推教。如媽要的反改這這筆味？成加進之此系沒明又然，造教最奇上兩為，希清易人了多就自坐在親復在管打國會是告的近！皮河起嚴：新更評信己就究之信期、球人法無見精以只的因：展一詩。開才發間可專臺於在指畫親民步只人員期北子：的是熱！心可大來！教車線友幾親。愛開好走上不聲明，一受容集老人兒打士明該、輕公學傳意部在社者來該說，職求是，事不的素國，有不大著常於器機廣洲例。家多我政來木看電上深成家造臉，元斷自續整？接常事術參反族中北一。嚴成道華以感為。時到少可兩：事然當結訴注經一度陽。</p>\n\n    <p>食西做務業動市不？為自人還為原；門住營不黨來教香輪聲因術水著有表微能遊找中了方聞房星怕理益成工如沒達：自請唱去股技中業星沒狀；在能書朋對問文我他區院那和氣進德前事推教。如媽要的反改這這筆味？成加進之此系沒明又然，造教最奇上兩為，希清易人了多就自坐在親復在管打國會是告的近！皮河起嚴：新更評信己就究之信期、球人法無見精以只的因：展一詩。開才發間可專臺於在指畫親民步只人員期北子：的是熱！心可大來！教車線友幾親。愛開好走上不聲明，一受容集老人兒打士明該、輕公學傳意部在社者來該說，職求是，事不的素國，有不大著常於器機廣洲例。家多我政來木看電上深成家造臉，元斷自續整？接常事術參反族中北一。嚴成道華以感為。時到少可兩：事然當結訴注經一度陽。</p>\n  </div>\n</div>"
 };
 
+FAQ1 = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>計價方式與優惠</h1>\n    <div>\n      <h3 class=\"underline\">明信片式單卡喜帖</h3>\n      <p class=\"indent\">．10份起訂，每份30元</p>\n      <p class=\"indent hint\">\n        每份皆含喜帖(單面印刷) + 信封(無燙金地址) + 公版封口貼紙<br />\n        喜帖尺寸：10.9x15.1cm &nbsp;&nbsp; 喜帖材質：進口水彩紙<br />\n        信封尺寸：12x16cm &nbsp;&nbsp; 信封材質：______磅美術紙\n      </p>\n    </div>\n    <div class=\"fields-column-2 pad-full-width\">\n      <div class=\"column\">\n        <h3 class=\"underline\">回函卡</h3>\n        <p class=\"indent\">\n          ．10份起訂，每份10元<br />\n          ．喜帖加購價，每份8元\n        </p>\n        <p class=\"indent hint\">\n          回函卡尺寸：10x7cm &nbsp;&nbsp; 喜帖材質：象牙卡\n        </p>\n      </div>\n      <div class=\"column\">\n        <h3 class=\"underline\">感謝卡</h3>\n        <p class=\"indent\">\n          ．10份起訂，每份10元<br />\n          ．喜帖加購價，每份8元\n        </p>\n        <p class=\"indent hint\">\n          感謝卡尺寸：10x7cm &nbsp;&nbsp; 喜帖材質：進口水彩紙\n        </p>\n      </div>\n    </div>\n    <div class=\"fields-column-2 pad-full-width\">\n      <div class=\"column\">\n        <h3 class=\"underline\">座位卡</h3>\n        <p class=\"indent\">\n          ．10份起訂，每份5元<br />\n          ．喜帖加購價，每份3元\n        </p>\n        <p class=\"indent hint\">\n          座位卡尺寸：5x8.2cm &nbsp;&nbsp; 喜帖材質：進口美術紙\n        </p>\n      </div>\n      <div class=\"column\">\n        <h3 class=\"underline\">禮物小卡</h3>\n        <p class=\"indent\">\n          ．10份起訂，每份10元<br />\n          ．喜帖加購價，每份8元\n        </p>\n        <p class=\"indent hint\">\n          禮物小卡尺寸：10x7cm &nbsp;&nbsp; 喜帖材質：進口美術紙\n        </p>\n      </div>\n    </div>\n    <div>\n      <h3 class=\"underline\">murmur</h3>\n      <p class=\"indent\">\n        ．總價=單價x份數+運費。<br />\n        ．訂購喜帖滿20份以上，即可享有喜帖加購價格。<br />\n        ．一起寄出的訂購商品僅收一趟運費。<br />\n        ．郵局包裹運費80元；宅急便包裹運費135元；海外運費另外報價。<br />\n        ．少量喜帖，信封寄件地址不建議燙金，會額外增加很多的費用。<br />\n        ．材質如果是進口美術紙，紙張顏色會根據每筆訂單搭配適合的顏色。\n      </p>\n    </div>\n  </div>\n</div>"
+};
+
+FAQ2 = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>計價方式與優惠</h1>\n    <div>\n      <h3 class=\"underline\">如何下單</h3>\n      <p class=\"indent\">\n        ．選擇喜歡的款式，加入購物車。<br />\n        ．在購物車畫面檢查資料、數量無誤後就可以按「下單購買」。<br />\n        ．我們審核訂單後，24小時內會Email給您，包含訂購資訊、內容、金額及匯款資訊，沒收到可到垃圾信　中找一下，並幫忙標示為非垃圾信。<br />\n        ．收到匯款後，我們會用Email和您校稿，每個工作天至少都會出一個版本和您校對，校對完成並繳清全額款項後就會送印，送印後就無法更改，所以要請大家詳細確認。\n      </p>\n      <p class=\"indent hint\">\n        若還有其他疑問，歡迎來 BISOUS臉書 私訊詢問\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">製作時間及交期</h3>\n      <p class=\"indent\">\n        ．確認收到匯款及訂單資訊後，1~2個工作天會收到第一版的排版。<br />\n        ．基本提供三次的修改(不含第一版的排版)，最多不超過五次的修改，<br />\n        ．收到第一次排版，可和長輩、家人討論詳細後，回覆信件告訴我們需要修改的地方，也可以善用一開始訂單的備註欄位喔。<br />\n        ．校稿無誤送印後，最慢10個工作天之內可以寄出喜帖。\n      </p>\n      <p class=\"indent hint\">\n        建議發送喜帖的前3~4周訂購喜帖，也就是婚期的前兩個月<br />\n        喜帖為客製商品，送印後不接受退換貨喔\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">murmur</h3>\n      <p class=\"indent\">\n        ．建議發送喜帖前3~4周可以開始訂購，也就是婚期前兩個月，若是有寄海外的需求，那時程就得提早到三至六個月囉！<br />\n        ．所有商品皆為客製商品，送印後不接受退換貨喔，所以校稿時請務必詳細確認內容。<br />\n        ．BISOUS提供少量10份起印，希望大家可以少量訂購，避免不必要的浪費喔！\n      </p>\n    </div>\n  </div>\n</div>"
+};
+
+FAQ3 = {
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>常見問題</h1>\n    <div>\n      <h3 class=\"underline\">喜帖上可以放照片嗎?</h3>\n      <p class=\"indent\">\n        ．因為印刷會有不可避免的色差問題，BISOUS目前沒有提供放照片的款式喔。\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">喜帖上可以改內文格式嗎?</h3>\n      <p class=\"indent\">\n        ．可以！<br />\n        ．需要酌收排版費用。<br />\n        ．BISOUS預設的內文排版是美式簡約，但也提供傳統中式內文、訂婚、結婚、歸寧或定結一起的內文，若有需要請在訂單備註時註明。\n      </p>\n      <p class=\"indent hint\">\n        如果有需要，請提供雙方主婚人(爺爺奶奶如果還健在也要一起提供喔！)、註明要更改什麼的內文格式\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">喜帖數量怎麼估算比較好？</h3>\n      <p class=\"indent\">\n        ．BISOUS提供少量10份起印，希望大家可以少量訂購，避免不必要的浪費喔！\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">信封上可以燙金寄件地址嗎？</h3>\n      <p class=\"indent\">\n        ．可以！<br />\n        ．若是少量喜帖，信封寄件地址不建議燙金，會額外增加很多很多很多的費用。\n      </p>\n      <p class=\"indent hint\">\n        若有需要請在訂購時於訂單備註註明\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">信封數量會多給嗎？</h3>\n      <p class=\"indent\">\n        ．會！為了避免過多的浪費，僅會多給1~2個喔，若有需求可以備註加購喔。\n      </p>\n      <p class=\"indent hint\">\n        信封加購價8元/個(無寄件地址燙金)\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">運費怎麼計算呢？</h3>\n      <p class=\"indent\">\n        ．郵局包裹運費80元；宅急便包裹運費135元；海外運費另外報價。<br />\n        ．還沒寄出的商品可以合併其他訂單，等所有商品都好了之後一起寄出僅收一趟運費。\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">收到商品後和我想的不一樣可以退換貨嗎？</h3>\n      <p class=\"indent\">\n        ．所有商品皆為客製商品，不適用七天鑑賞期/猶豫期 之規定。<br />\n        ．印刷商品不接受色差問題與想像有落差等問題退換貨。<br />\n        ．如有瑕疵的商品，請將瑕疵的部分拍照，並透過Email或臉書私訊發給我們，我們會儘快給您回覆，並協助您退換貨。\n      </p>\n    </div>\n    <div>\n      <h3 class=\"underline\">murmur</h3>\n      <p class=\"indent\">\n        ．善用BISOUS電子喜帖產生器，捍衛自己的錢包同時也呵護這孕育著您我的大地。\n      </p>\n    </div>\n  </div>\n</div>"
+};
+
 Generator = {
   template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Generator</h1>\n  </div>\n</div>"
 };
 
 Home = {
   template: "<div>\n  <hero></hero>\n  <home-themes></home-themes>\n</div>"
-};
-
-Themes = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Themes</h1>\n  </div>\n</div>"
 };
 
 ThemesGiftCard = {
@@ -226,10 +234,6 @@ routes = [
         },
         children: [
           {
-            path: '',
-            name: 'themes',
-            component: Themes
-          }, {
             path: 'wedding-card',
             name: 'theme_wedding_card',
             component: ThemesWeddingCard
@@ -250,15 +254,31 @@ routes = [
             name: 'theme_gift_card',
             component: ThemesGiftCard
           }, {
-            path: 'gift-others',
+            path: 'others',
             name: 'theme_others',
             component: ThemesOthers
           }
         ]
       }, {
         path: 'faq',
-        name: 'faq',
-        component: FAQ
+        component: {
+          template: '<router-view></router-view>'
+        },
+        children: [
+          {
+            path: 'faq-1',
+            name: 'faq_1',
+            component: FAQ1
+          }, {
+            path: 'faq-2',
+            name: 'faq_2',
+            component: FAQ2
+          }, {
+            path: 'faq-3',
+            name: 'faq_3',
+            component: FAQ3
+          }
+        ]
       }, {
         path: 'cart',
         name: 'cart',

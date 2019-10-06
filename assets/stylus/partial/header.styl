@@ -23,12 +23,10 @@ $header-height-sticky = 60px
       width 197px
       height $header-height-sticky
       background-image url('/images/logo-h.png') !important
-    #header-nav li
-      line-height $header-height-sticky
-    #header-nav li a
+    #header-nav li > a
     #header-cart a
       color $global-text-color !important
-    #header-nav li a:after
+    #header-nav li > a:after
       background $global-text-color !important
 
   #header-brand
@@ -55,34 +53,74 @@ $header-height-sticky = 60px
     display flex
     align-items center
     justify-content center
-    ul
+    > ul
       margin 0
       padding 0
-    li
-      list-style none
-      display inline-block
-      margin 0 40px
-      line-height $header-height
-      &:first-child
-        margin-left 0
-      &:last-child
-        margin-right 0
-      a
+      > li
         position relative
-        &:hover:after
-          width 100%
-        &:after
-          background $global-text-color
-          bottom -2px
-          content ""
-          height 3px
-          left 0
-          position absolute
-          transition width .5s
-          width 0
+        list-style none
+        display inline-block
+        padding 10px 40px
+        &:hover .sub-nav
+          left 50%
+        &:first-child
+          margin-left 0
+        &:last-child
+          margin-right 0
+        > a
+          position relative
+          font-size 14px
+          &:hover:after
+            width 100%
+          &:after
+            background $global-text-color
+            bottom -2px
+            content ""
+            height 3px
+            left 0
+            position absolute
+            transition width .5s
+            width 0
+    .sub-nav
+      position absolute
+      top calc(100% - 5px)
+      // left 50%
+      left -9999%
+      background $color-gray-light
+      transform translateX(-50%)
+      border-radius 5px
+      margin 0
+      padding 10px 0
+      list-style none
+      z-index 99999
+      &:after
+        border-color transparent transparent #f9f9f9
+        border-style solid
+        border-width 0 6px 6px
+        content ""
+        display block
+        height 0
+        left 50%
+        position absolute
+        top -6px
+        transform translateX(-50%)
+        width 0
+        z-index 100000
+
+      li
+        display block
+        line-height 1
+        margin 0
+        padding 0
+        width 200px
+        text-align center
+        a
+          display block
+          padding 10px 0
+          color $global-text-color !important
 
     .home &
-      li a
+      li > a
         color #FFFFFF
         &:after
           background #FFFFFF
@@ -95,3 +133,4 @@ $header-height-sticky = 60px
     .home &
       a
         color #FFFFFF
+        font-size 14px
