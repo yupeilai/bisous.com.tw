@@ -80,7 +80,7 @@ appendFont = (font, callback) ->
   link.setAttribute 'type', 'text/css'
   link.onload = ->
     FontFaceOnload font,
-      success: -> callback()
+      success: -> xx 'font expended'
   link.setAttribute 'href', '/fonts/' + font + '/font.css?v=1.0'
   document.getElementsByTagName('head')[0].appendChild link
 

@@ -1,0 +1,12 @@
+/* Webfont: BellMT */@font-face {
+    font-family: 'BellMT';
+    src: url('/fonts/BellMT/BellMT.eot'); /* IE9 Compat Modes */
+    src: url('/fonts/BellMT/BellMT.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/fonts/BellMT/BellMT.woff') format('woff'), /* Modern Browsers */
+         url('/fonts/BellMT/BellMT.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('/fonts/BellMT/BellMT.svg#BellMT') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

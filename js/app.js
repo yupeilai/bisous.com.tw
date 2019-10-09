@@ -111,7 +111,7 @@ appendFont = function(font, callback) {
   link.onload = function() {
     return FontFaceOnload(font, {
       success: function() {
-        return callback();
+        return xx('font expended');
       }
     });
   };
@@ -220,42 +220,43 @@ FAQ3 = {
 };
 
 Generator = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"basemap_image\" :src=\"basemap_image\" />\n            <div :class=\"['text-wrapper', template]\">\n              <div class=\"mate_1\" ref=\"mate_1\" v-text=\"mate_1\"></div>\n              <div class=\"mate_2\" ref=\"mate_2\" v-text=\"mate_2\"></div>\n              <div class=\"date\" ref=\"date\" v-text=\"date\"></div>\n              <div class=\"time\" ref=\"time\" v-text=\"time\"></div>\n              <div class=\"location\" ref=\"location\" v-text=\"location\"></div>\n              <div class=\"address\" ref=\"address\" v-html=\"nl2br(htmlEncode(address))\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_1_input\" v-model=\"mate_1_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"mate_2_input\" v-model=\"mate_2_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"date_input\" v-model=\"date_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"time_input\" v-model=\"time_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"location_input\" v-model=\"location_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"address_input\" v-model=\"address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"template_image\" :src=\"'/images/generator/' + current_template + '.png'\" />\n            <div :class=\"['text-wrapper', current_template]\">\n              <div class=\"wedding_mate_1\" ref=\"wedding_mate_1\" v-text=\"wedding_mate_1\"></div>\n              <div class=\"wedding_mate_2\" ref=\"wedding_mate_2\" v-text=\"wedding_mate_2\"></div>\n              <div class=\"wedding_date\" ref=\"wedding_date\" v-text=\"wedding_date\"></div>\n              <div class=\"wedding_time\" ref=\"wedding_time\" v-text=\"wedding_time\"></div>\n              <div class=\"wedding_location\" ref=\"wedding_location\" v-text=\"wedding_location\"></div>\n              <div class=\"wedding_address\" ref=\"wedding_address\" v-html=\"nl2br(htmlEncode(wedding_address))\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'選擇版型'\"></h3>\n              <div id=\"templates_list_container\" class=\"template-select-list\">\n                <label v-for=\"(item, index) in templates\" :class=\"{ 'active' : item == current_template }\">\n                  <div class=\"image-item\" :style=\"{ backgroundImage: 'url(/images/generator/thumbnail/' + item + '.jpg)' }\"></div>\n                  <input type=\"radio\" v-model=\"current_template\" :value=\"item\">\n                </label>\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"wedding_mate_1_input\" v-model=\"wedding_mate_1_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"wedding_mate_2_input\" v-model=\"wedding_mate_2_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"wedding_date_input\" v-model=\"wedding_date_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"wedding_time_input\" v-model=\"wedding_time_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"wedding_location_input\" v-model=\"wedding_location_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"wedding_address_input\" v-model=\"wedding_address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
   data: function() {
     return {
-      basemap_image: '/images/generator/01.png',
-      preview_image: '/images/generator/01.png',
-      template: 'template_01',
-      mate_1: '',
-      mate_1_default: 'Bisous',
-      mate_1_input: 'Bisous',
-      mate_2: '',
-      mate_2_default: 'Yellowhite',
-      mate_2_input: 'Yellowhite',
-      date: '',
-      date_default: 'MONDAY, SEPTEMBER 30TH, 2019',
-      date_input: 'MONDAY, SEPTEMBER 30TH, 2019',
-      time: '',
-      time_default: 'AT 3:30, IN THE AFTERNOON',
-      time_input: 'AT 3:30, IN THE AFTERNOON',
-      location: '',
-      location_default: 'BISOUS',
-      location_input: 'BISOUS',
-      address: '',
-      address_default: 'WWW.BISOUS.COM.TW',
-      address_input: 'WWW.BISOUS.COM.TW',
+      preview_image: '/images/generator/template_01.png',
+      templates: ['template_01', 'template_02', 'template_03', 'template_04'],
+      current_template: 'template_01',
+      wedding_mate_1: '',
+      wedding_mate_1_default: 'Bisous',
+      wedding_mate_1_input: 'Bisous',
+      wedding_mate_2: '',
+      wedding_mate_2_default: 'Yellowhite',
+      wedding_mate_2_input: 'Yellowhite',
+      wedding_date: '',
+      wedding_date_default: 'MONDAY, SEPTEMBER 30TH, 2019',
+      wedding_date_input: 'MONDAY, SEPTEMBER 30TH, 2019',
+      wedding_time: '',
+      wedding_time_default: 'AT 3:30, IN THE AFTERNOON',
+      wedding_time_input: 'AT 3:30, IN THE AFTERNOON',
+      wedding_location: '',
+      wedding_location_default: 'BISOUS',
+      wedding_location_input: 'BISOUS',
+      wedding_address: '',
+      wedding_address_default: 'WWW.BISOUS.COM.TW',
+      wedding_address_input: 'WWW.BISOUS.COM.TW',
       initialed: false,
       loading_preview: false
     };
   },
   beforeMount: function() {
-    appendFont('Ramland', this.generate_preview);
-    this.mate_1 = this.mate_1_default;
-    this.mate_2 = this.mate_2_default;
-    this.date = this.date_default;
-    this.time = this.time_default;
-    this.location = this.location_default;
-    return this.address = this.address_default;
+    appendFont('Ramland');
+    appendFont('BellMT');
+    this.wedding_mate_1 = this.wedding_mate_1_default;
+    this.wedding_mate_2 = this.wedding_mate_2_default;
+    this.wedding_date = this.wedding_date_default;
+    this.wedding_time = this.wedding_time_default;
+    this.wedding_location = this.wedding_location_default;
+    return this.wedding_address = this.wedding_address_default;
   },
   mounted: function() {
     this.generate_preview();
@@ -271,7 +272,6 @@ Generator = {
       return this.prepare_generator();
     },
     prepare_generator: function() {
-      gogo.start();
       this.show_social_share_popup();
       return this.create_image_html2canvas();
     },
@@ -298,60 +298,67 @@ Generator = {
     }
   },
   watch: {
-    mate_1_input: function(value) {
-      return this.mate_1 = value === '' ? this.mate_1_default : value;
-    },
-    mate_1: function(value) {
+    current_template: function(value) {
       if (this.initialed) {
         return this.$nextTick(function() {
           return this.generate_preview();
         });
       }
     },
-    mate_2_input: function(value) {
-      return this.mate_2 = value === '' ? this.mate_2_default : value;
+    wedding_mate_1_input: function(value) {
+      return this.wedding_mate_1 = value === '' ? this.wedding_mate_1_default : value;
     },
-    mate_2: function(value) {
+    wedding_mate_1: function(value) {
       if (this.initialed) {
         return this.$nextTick(function() {
           return this.generate_preview();
         });
       }
     },
-    date_input: function(value) {
-      return this.date = value === '' ? this.date_default : value;
+    wedding_mate_2_input: function(value) {
+      return this.wedding_mate_2 = value === '' ? this.wedding_mate_2_default : value;
     },
-    date: function(value) {
+    wedding_mate_2: function(value) {
       if (this.initialed) {
         return this.$nextTick(function() {
           return this.generate_preview();
         });
       }
     },
-    time_input: function(value) {
-      return this.time = value === '' ? this.time_default : value;
+    wedding_date_input: function(value) {
+      return this.wedding_date = value === '' ? this.wedding_date_default : value;
     },
-    time: function(value) {
+    wedding_date: function(value) {
       if (this.initialed) {
         return this.$nextTick(function() {
           return this.generate_preview();
         });
       }
     },
-    location_input: function(value) {
-      return this.location = value === '' ? this.location_default : value;
+    wedding_time_input: function(value) {
+      return this.wedding_time = value === '' ? this.wedding_time_default : value;
     },
-    location: function(value) {
+    wedding_time: function(value) {
       if (this.initialed) {
         return this.$nextTick(function() {
           return this.generate_preview();
         });
       }
     },
-    address_input: function(value) {
-      return this.address = value === '' ? this.address_default : value;
+    wedding_location_input: function(value) {
+      return this.wedding_location = value === '' ? this.wedding_location_default : value;
     },
-    address: function(value) {
+    wedding_location: function(value) {
+      if (this.initialed) {
+        return this.$nextTick(function() {
+          return this.generate_preview();
+        });
+      }
+    },
+    wedding_address_input: function(value) {
+      return this.wedding_address = value === '' ? this.wedding_address_default : value;
+    },
+    wedding_address: function(value) {
       if (this.initialed) {
         return this.$nextTick(function() {
           return this.generate_preview();
