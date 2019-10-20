@@ -175,12 +175,12 @@ Generator =
       ).bind(@), 1000)
 
     add_to_cart: ->
-      @$parent.$parent.form.wedding_mate_1 = @wedding_mate_1
-      @$parent.$parent.form.wedding_mate_2 = @wedding_mate_2
-      @$parent.$parent.form.wedding_date = @wedding_date
-      @$parent.$parent.form.wedding_time = @wedding_time
-      @$parent.$parent.form.wedding_location = @wedding_location
-      @$parent.$parent.form.wedding_address = @wedding_address
+      @$parent.$parent.wedding_mate_1 = @wedding_mate_1
+      @$parent.$parent.wedding_mate_2 = @wedding_mate_2
+      @$parent.$parent.wedding_date = @wedding_date
+      @$parent.$parent.wedding_time = @wedding_time
+      @$parent.$parent.wedding_location = @wedding_location
+      @$parent.$parent.wedding_address = @wedding_address
       if inArray(@current_template, @$parent.$parent.cart) is false
         item = {
           template: @current_template

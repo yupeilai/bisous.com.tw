@@ -29,6 +29,7 @@ routes = [
         ]
       }
       { path: 'cart', name: 'cart', component: Cart }
+      { path: 'thankyou', name: 'thankyou', component: Thankyou }
       { path: '*', name: 'error404', component: Error404 }
     ]
   }
