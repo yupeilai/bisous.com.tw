@@ -28,25 +28,13 @@ headerTo = (path) -> window.location = path
 focusFirstInput = -> $('form').find('input[type="text"], textarea').first().focus()
 scrollTop = -> zenscroll.toY 0, 1
 detectBrowserLang = -> language = navigator.languages and navigator.languages[0] or navigator.language or navigator.userLanguage
-
 detectInFBApp = ->
   ua = navigator.userAgent or navigator.vendor or window.opera
   return ua.indexOf('FBAN') > -1 or ua.indexOf('FBAV') > -1
-
-refreshOGData = (url) ->
-  $.ajax
-    url: 'https://graph.facebook.com'
-    type: 'post'
-    data:
-      id: url
-      scrape: 'true'
-    dataType: 'json'
-
 nl2br = (string) ->
   if typeof string == 'undefined' or string == null then return ''
   string = (string + '').replace /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</div><div>$2'
   string = '<div>' + string + '</div>'
-
 forceDownload = (url, filename) ->
   link = document.createElement 'a'
   link.href = url
@@ -54,6 +42,14 @@ forceDownload = (url, filename) ->
   document.body.appendChild link
   link.click();
   document.body.removeChild link
+inArray = (needle, haystack) ->
+  length = haystack.length
+  i = 0
+  while i < length
+    if haystack[i] == needle
+      return true
+    i++
+  false
 
 
 #==============================================================
@@ -82,3 +78,12 @@ htmlDecode = (value) -> jQuery('<div/>').html(value).text()
 #==========================================
 window.onload = ->
   jQuery('body').addClass 'loaded'
+
+
+#==========================================
+# Router
+#==========================================
+routeRedirect = (route_name, route_params) ->
+  router.push
+    name: route_name
+    params: route_params

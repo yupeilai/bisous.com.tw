@@ -7,3 +7,6 @@ Cart =
       </div>
     </div>
   """
+
+  mounted: ->
+    xx @$parent.$parent.cart

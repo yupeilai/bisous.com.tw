@@ -1,4 +1,4 @@
-var About, Cart, DEBUG, Error404, FAQ, FAQ1, FAQ2, FAQ3, Generator, Home, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, appendFont, detectBrowserLang, detectInFBApp, float, focusFirstInput, forceDownload, headerTo, htmlDecode, htmlEncode, isAndroid, nl2br, refreshOGData, router, routes, scrollTop, xx;
+var About, Cart, DEBUG, Error404, FAQ, FAQ1, FAQ2, FAQ3, Generator, Home, ThemesGiftCard, ThemesOthers, ThemesRSVP, ThemesSeatingCard, ThemesThankYouCard, ThemesWeddingCard, app, appendFont, detectBrowserLang, detectInFBApp, float, focusFirstInput, forceDownload, headerTo, htmlDecode, htmlEncode, inArray, isAndroid, nl2br, routeRedirect, router, routes, scrollTop, xx;
 
 DEBUG = true;
 
@@ -41,18 +41,6 @@ detectInFBApp = function() {
   return ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1;
 };
 
-refreshOGData = function(url) {
-  return $.ajax({
-    url: 'https://graph.facebook.com',
-    type: 'post',
-    data: {
-      id: url,
-      scrape: 'true'
-    },
-    dataType: 'json'
-  });
-};
-
 nl2br = function(string) {
   if (typeof string === 'undefined' || string === null) {
     return '';
@@ -69,6 +57,19 @@ forceDownload = function(url, filename) {
   document.body.appendChild(link);
   link.click();
   return document.body.removeChild(link);
+};
+
+inArray = function(needle, haystack) {
+  var i, length;
+  length = haystack.length;
+  i = 0;
+  while (i < length) {
+    if (haystack[i] === needle) {
+      return true;
+    }
+    i++;
+  }
+  return false;
 };
 
 appendFont = function(font, callback) {
@@ -97,6 +98,13 @@ htmlDecode = function(value) {
 
 window.onload = function() {
   return jQuery('body').addClass('loaded');
+};
+
+routeRedirect = function(route_name, route_params) {
+  return router.push({
+    name: route_name,
+    params: route_params
+  });
 };
 
 Vue.mixin({
@@ -164,7 +172,10 @@ About = {
 };
 
 Cart = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Cart</h1>\n    <p>jotForm here</p>\n  </div>\n</div>"
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>Cart</h1>\n    <p>jotForm here</p>\n  </div>\n</div>",
+  mounted: function() {
+    return xx(this.$parent.$parent.cart);
+  }
 };
 
 Error404 = {
@@ -188,12 +199,12 @@ FAQ3 = {
 };
 
 Generator = {
-  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"template_image\" :src=\"'/images/generator/' + current_template + '.png'\" />\n            <div :class=\"['text-wrapper', current_template]\">\n              <div class=\"wedding_mate_1\" ref=\"wedding_mate_1\" v-text=\"wedding_mate_1\"></div>\n              <div class=\"wedding_mate_2\" ref=\"wedding_mate_2\" v-text=\"wedding_mate_2\"></div>\n              <div class=\"wedding_date\" ref=\"wedding_date\" v-text=\"wedding_date\"></div>\n              <div class=\"wedding_time\" ref=\"wedding_time\" v-text=\"wedding_time\"></div>\n              <div class=\"wedding_location\" ref=\"wedding_location\" v-text=\"wedding_location\"></div>\n              <div class=\"wedding_address\" ref=\"wedding_address\" v-html=\"nl2br(htmlEncode(wedding_address))\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'選擇版型'\"></h3>\n              <div id=\"templates_list_container\" class=\"template-select-list\">\n                <label v-for=\"(item, index) in templates\" :class=\"{ 'active' : item == current_template }\">\n                  <div class=\"image-item\" :style=\"{ backgroundImage: 'url(/images/generator/thumbnail/' + item + '.jpg)' }\"></div>\n                  <input type=\"radio\" v-model=\"current_template\" :value=\"item\">\n                </label>\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"wedding_mate_1_input\" v-model=\"wedding_mate_1_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"wedding_mate_2_input\" v-model=\"wedding_mate_2_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"wedding_date_input\" v-model=\"wedding_date_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"wedding_time_input\" v-model=\"wedding_time_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"wedding_location_input\" v-model=\"wedding_location_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"wedding_address_input\" v-model=\"wedding_address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n          <div class=\"form-action\">\n            <div class=\"generator-buttons\">\n              <button type=\"button\" class=\"button\" v-on:click=\"download_image()\">\n                下載\n              </button>\n              <button type=\"button\" class=\"button\" v-on:click=\"add_to_cart()\">\n                訂購\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
+  template: "<div class=\"default-layout\">\n  <div class=\"wrapper\">\n    <h1>喜帖產生器</h1>\n    <div class=\"generator-wrapper\">\n      <div id=\"generator_container\">\n        <div id=\"generator_preview\" ref=\"generator_preview\">\n          <div class=\"preview-area\">\n            <div class=\"preview-area-wrapper\">\n              <div class=\"loading\" v-bind:class=\"{ 'on': loading_preview }\">\n                <div class=\"spinner\">\n                  <div class=\"bounce1\"></div>\n                  <div class=\"bounce2\"></div>\n                  <div class=\"bounce3\"></div>\n                </div>\n              </div>\n              <img :src=\"preview_image\" />\n            </div>\n          </div>\n          <div id=\"output_container\">\n            <img ref=\"template_image\" :src=\"'/images/templates/' + current_template + '.png'\" />\n            <div :class=\"['text-wrapper', current_template]\">\n              <div class=\"wedding_mate_1\" ref=\"wedding_mate_1\" v-text=\"wedding_mate_1\"></div>\n              <div class=\"wedding_mate_2\" ref=\"wedding_mate_2\" v-text=\"wedding_mate_2\"></div>\n              <div class=\"wedding_date\" ref=\"wedding_date\" v-text=\"wedding_date\"></div>\n              <div class=\"wedding_time\" ref=\"wedding_time\" v-text=\"wedding_time\"></div>\n              <div class=\"wedding_location\" ref=\"wedding_location\" v-text=\"wedding_location\"></div>\n              <div class=\"wedding_address\" ref=\"wedding_address\" v-html=\"nl2br(htmlEncode(wedding_address))\"></div>\n            </div>\n          </div>\n        </div>\n        <div id=\"generator_form\">\n          <div class=\"form-input\">\n            <div class=\"form-group\">\n              <h3 v-text=\"'選擇版型'\"></h3>\n              <div id=\"templates_list_container\" class=\"template-select-list\">\n                <label v-for=\"(item, index) in templates\" :class=\"{ 'active' : item == current_template }\">\n                  <div class=\"image-item\" :style=\"{ backgroundImage: 'url(/images/templates/thumbnail/' + item + '.jpg)' }\"></div>\n                  <input type=\"radio\" v-model=\"current_template\" :value=\"item\">\n                </label>\n              </div>\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"wedding_mate_1_input\" v-model=\"wedding_mate_1_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'結婚人'\"></h3>\n              <input type=\"text\" ref=\"wedding_mate_2_input\" v-model=\"wedding_mate_2_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'日期'\"></h3>\n              <input type=\"text\" ref=\"wedding_date_input\" v-model=\"wedding_date_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'時間'\"></h3>\n              <input type=\"text\" ref=\"wedding_time_input\" v-model=\"wedding_time_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地點'\"></h3>\n              <input type=\"text\" ref=\"wedding_location_input\" v-model=\"wedding_location_input\" v-on:focus=\"$event.target.select()\" />\n            </div>\n            <div class=\"form-group\">\n              <h3 v-text=\"'地址/電話'\"></h3>\n              <textarea ref=\"wedding_address_input\" v-model=\"wedding_address_input\" v-on:focus=\"$event.target.select()\" /></textarea>\n            </div>\n          </div>\n          <div class=\"form-action\">\n            <div class=\"generator-buttons\">\n              <button type=\"button\" class=\"button\" v-on:click=\"download_image()\">\n                下載\n              </button>\n              <button type=\"button\" class=\"button\" v-on:click=\"add_to_cart()\">\n                訂購\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
   data: function() {
     return {
-      preview_image: '/images/generator/template_01.png',
-      templates: ['template_01', 'template_02', 'template_03', 'template_04'],
-      current_template: 'template_01',
+      preview_image: '/images/templates/TP01.png',
+      templates: ['TP01', 'TP02', 'TP03', 'TP04'],
+      current_template: 'TP01',
       wedding_mate_1: '',
       wedding_mate_1_default: 'Bisous',
       wedding_mate_1_input: 'Bisous',
@@ -286,7 +297,21 @@ Generator = {
       }).bind(this), 1000);
     },
     add_to_cart: function() {
-      return xx('add_to_cart');
+      var item;
+      this.$parent.$parent.form.wedding_mate_1 = this.wedding_mate_1;
+      this.$parent.$parent.form.wedding_mate_2 = this.wedding_mate_2;
+      this.$parent.$parent.form.wedding_date = this.wedding_date;
+      this.$parent.$parent.form.wedding_time = this.wedding_time;
+      this.$parent.$parent.form.wedding_location = this.wedding_location;
+      this.$parent.$parent.form.wedding_address = this.wedding_address;
+      if (inArray(this.current_template, this.$parent.$parent.cart) === false) {
+        item = {
+          template: this.current_template,
+          total: 10
+        };
+        this.$parent.$parent.cart.push(item);
+      }
+      return routeRedirect('cart', '');
     }
   },
   watch: {
@@ -497,7 +522,15 @@ app = new Vue({
   mixins: [],
   data: function() {
     return {
-      cart: []
+      cart: [],
+      form: {
+        wedding_mate_1: '',
+        wedding_mate_2: '',
+        wedding_date: '',
+        wedding_time: '',
+        wedding_location: '',
+        wedding_address: ''
+      }
     };
   },
   methods: {

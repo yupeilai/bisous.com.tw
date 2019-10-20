@@ -19,7 +19,7 @@ Generator =
                 </div>
               </div>
               <div id="output_container">
-                <img ref="template_image" :src="'/images/generator/' + current_template + '.png'" />
+                <img ref="template_image" :src="'/images/templates/' + current_template + '.png'" />
                 <div :class="['text-wrapper', current_template]">
                   <div class="wedding_mate_1" ref="wedding_mate_1" v-text="wedding_mate_1"></div>
                   <div class="wedding_mate_2" ref="wedding_mate_2" v-text="wedding_mate_2"></div>
@@ -36,7 +36,7 @@ Generator =
                   <h3 v-text="'選擇版型'"></h3>
                   <div id="templates_list_container" class="template-select-list">
                     <label v-for="(item, index) in templates" :class="{ 'active' : item == current_template }">
-                      <div class="image-item" :style="{ backgroundImage: 'url(/images/generator/thumbnail/' + item + '.jpg)' }"></div>
+                      <div class="image-item" :style="{ backgroundImage: 'url(/images/templates/thumbnail/' + item + '.jpg)' }"></div>
                       <input type="radio" v-model="current_template" :value="item">
                     </label>
                   </div>
@@ -85,15 +85,15 @@ Generator =
 
   data: ->
     {
-      preview_image: '/images/generator/template_01.png'
+      preview_image: '/images/templates/TP01.png'
 
       templates: [
-        'template_01'
-        'template_02'
-        'template_03'
-        'template_04'
+        'TP01'
+        'TP02'
+        'TP03'
+        'TP04'
       ]
-      current_template: 'template_01'
+      current_template: 'TP01'
 
       wedding_mate_1: ''
       wedding_mate_1_default: 'Bisous'
@@ -175,7 +175,19 @@ Generator =
       ).bind(@), 1000)
 
     add_to_cart: ->
-      xx 'add_to_cart'
+      @$parent.$parent.form.wedding_mate_1 = @wedding_mate_1
+      @$parent.$parent.form.wedding_mate_2 = @wedding_mate_2
+      @$parent.$parent.form.wedding_date = @wedding_date
+      @$parent.$parent.form.wedding_time = @wedding_time
+      @$parent.$parent.form.wedding_location = @wedding_location
+      @$parent.$parent.form.wedding_address = @wedding_address
+      if inArray(@current_template, @$parent.$parent.cart) is false
+        item = {
+          template: @current_template
+          total: 10
+        }
+        @$parent.$parent.cart.push item
+      routeRedirect 'cart', ''
 
   watch:
     current_template: (value) ->
