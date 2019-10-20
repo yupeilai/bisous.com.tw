@@ -71,10 +71,11 @@ $header-height-sticky = 60px
           position relative
           font-size 14px
           &:hover:after
+          &.router-link-active:after
             width 100%
           &:after
             background $global-text-color
-            bottom -2px
+            bottom -4px
             content ""
             height 3px
             left 0
@@ -130,7 +131,8 @@ $header-height-sticky = 60px
     display flex
     justify-content flex-end
     align-items center
+    a
+      font-size 14px
     .home &
       a
         color #FFFFFF
-        font-size 14px

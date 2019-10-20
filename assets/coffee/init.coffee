@@ -47,28 +47,13 @@ nl2br = (string) ->
   string = (string + '').replace /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1</div><div>$2'
   string = '<div>' + string + '</div>'
 
-
-#==========================================
-# Browser check
-#==========================================
-isMobile = ->
-  if navigator.userAgent.match(/Android/i) or navigator.userAgent.match(/webOS/i) or navigator.userAgent.match(/iPhone/i) or navigator.userAgent.match(/iPod/i) or navigator.userAgent.match(/iPad/i) or navigator.userAgent.match(/BlackBerry/) then return true else return false
-
-isIE = ->
-  return if navigator.userAgent.indexOf('MSIE ') > 0 or ! !navigator.userAgent.match(/Trident.*rv\:11\./) then true else false
-
-isSafari = ->
-  ua = navigator.userAgent.toLowerCase()
-  if ua.indexOf('safari') != -1
-    return if ua.indexOf('chrome') > -1 then false else true
-  else
-    return false
-
-isFirefox = ->
-  navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-
-isMobileChrome = ->
-  return if navigator.userAgent.match('CriOS') then true else false
+forceDownload = (url, filename) ->
+  link = document.createElement 'a'
+  link.href = url
+  link.download = filename
+  document.body.appendChild link
+  link.click();
+  document.body.removeChild link
 
 
 #==============================================================

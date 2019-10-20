@@ -12,6 +12,11 @@ app = new Vue({
   router: router
   mixins: []
 
+  data: ->
+    {
+      cart: []
+    }
+
   methods:
     handle_scroll: (event) ->
       if window.scrollY > 20

@@ -66,6 +66,16 @@ Generator =
                   <textarea ref="wedding_address_input" v-model="wedding_address_input" v-on:focus="$event.target.select()" /></textarea>
                 </div>
               </div>
+              <div class="form-action">
+                <div class="generator-buttons">
+                  <button type="button" class="button" v-on:click="download_image()">
+                    下載
+                  </button>
+                  <button type="button" class="button" v-on:click="add_to_cart()">
+                    訂購
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -150,6 +160,22 @@ Generator =
           ).catch (error) ->
             xx error
       ).bind(@), 500)
+
+    download_image: ->
+      setTimeout(( ->
+        self = @
+        html2canvas(document.querySelector('#output_container'), { scale: 1, logging: false, backgroundColor: null }).then((canvas) ->
+            output = canvas.toDataURL 'image/png'
+            if $is.not.desktop()
+              headerTo output
+            else
+              forceDownload output, 'image.png'
+          ).catch (error) ->
+            xx error
+      ).bind(@), 1000)
+
+    add_to_cart: ->
+      xx 'add_to_cart'
 
   watch:
     current_template: (value) ->

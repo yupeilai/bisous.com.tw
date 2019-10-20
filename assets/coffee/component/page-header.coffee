@@ -35,7 +35,7 @@ Vue.component 'page-header',
           </ul>
         </div>
         <div id="header-cart">
-          <router-link :to="{name: 'cart'}">Cart</router-link>
+          <router-link :to="{name: 'cart'}">Cart (${$parent.cart.length})</router-link>
         </div>
       </div>
     </header>
