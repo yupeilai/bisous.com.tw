@@ -14,13 +14,30 @@ app = new Vue({
 
   data: ->
     {
-      cart: []
-      wedding_mate_1: ''
-      wedding_mate_2: ''
-      wedding_date: ''
-      wedding_time: ''
-      wedding_location: ''
-      wedding_address: ''
+      cart: [
+        {
+          template: 'TP01'
+          total: 10
+        }
+      ]
+      form: {
+        wedding_mate_1: ''
+        wedding_mate_2: ''
+        wedding_date: ''
+        wedding_time: ''
+        wedding_location: ''
+        wedding_address: ''
+
+        order_name: ''
+        order_phone: ''
+        order_email: ''
+        order_note: ''
+
+        shipping_name: ''
+        shipping_phone: ''
+        shipping_address: ''
+        shipping_method: ''
+      }
     }
 
   methods:

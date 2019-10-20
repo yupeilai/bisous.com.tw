@@ -3,7 +3,10 @@ Cart =
     <div class="default-layout">
       <div class="wrapper">
         <h1>訂購</h1>
-        <div class="fields-column-2 pad-full-width">
+        <div v-if="this.$parent.$parent.cart.length == 0">
+          你的購物車目前沒有東西唷！
+        </div>
+        <div class="fields-column-2 pad-full-width" v-if="this.$parent.$parent.cart.length > 0">
           <div class="column">
             <h3 class="underline">訂購表單</h3>
             <form class="jotform-form" action="https://submit.jotform.me/submit/92921919688475/" method="post" name="form_92921919688475" id="92921919688475" accept-charset="utf-8">
@@ -20,7 +23,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_3" class="form-input-wide jf-required">
-                      <input type="text" id="input_3" name="q3_typeA" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_3" required="" />
+                      <input type="text" id="input_3" name="q3_typeA" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_3" required="" v-model="form.order_name" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_textbox" id="id_4">
@@ -31,7 +34,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_4" class="form-input-wide jf-required">
-                      <input type="text" id="input_4" name="q4_typeA4" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_4" required="" />
+                      <input type="text" id="input_4" name="q4_typeA4" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_4" required="" v-model="form.order_phone" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_email" id="id_5">
@@ -43,7 +46,7 @@ Cart =
                     </label>
                     <div id="cid_5" class="form-input-wide jf-required">
                       <span class="form-sub-label-container" style="vertical-align:top">
-                        <input type="email" id="input_5" name="q5_email" class="form-textbox validate[required, Email]" size="30" value="" data-component="email" aria-labelledby="label_5 sublabel_input_5" required="" />
+                        <input type="email" id="input_5" name="q5_email" class="form-textbox validate[required, Email]" size="30" value="" data-component="email" aria-labelledby="label_5 sublabel_input_5" required="" v-model="form.order_email" />
                         <label class="form-sub-label" for="input_5" id="sublabel_input_5" style="min-height:13px"> 請務必填寫正確，我們會用Email確認訂單 </label>
                       </span>
                     </div>
@@ -56,7 +59,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_6" class="form-input-wide jf-required">
-                      <input type="text" id="input_6" name="q6_typeA6" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_6" required="" />
+                      <input type="text" id="input_6" name="q6_typeA6" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_6" required="" v-model="form.shipping_name" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_textbox" id="id_7">
@@ -67,7 +70,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_7" class="form-input-wide jf-required">
-                      <input type="text" id="input_7" name="q7_typeA7" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_7" required="" />
+                      <input type="text" id="input_7" name="q7_typeA7" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_7" required="" v-model="form.shipping_phone" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_textbox" id="id_8">
@@ -78,7 +81,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_8" class="form-input-wide jf-required">
-                      <input type="text" id="input_8" name="q8_typeA8" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_8" required="" />
+                      <input type="text" id="input_8" name="q8_typeA8" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_8" required="" v-model="form.shipping_address" />
                     </div>
                   </li>
                   <li class="form-line" data-type="control_radio" id="id_10">
@@ -88,13 +91,13 @@ Cart =
                         <span class="form-radio-item" style="clear:left">
                           <span class="dragger-item">
                           </span>
-                          <input type="radio" class="form-radio" id="input_10_0" name="q10_typeA10" value="郵寄包裹" />
+                          <input type="radio" class="form-radio" id="input_10_0" name="q10_typeA10" value="郵寄包裹" v-model="form.shipping_method" />
                           <label id="label_input_10_0" for="input_10_0"> 郵寄包裹 </label>
                         </span>
                         <span class="form-radio-item" style="clear:left">
                           <span class="dragger-item">
                           </span>
-                          <input type="radio" class="form-radio" id="input_10_1" name="q10_typeA10" value="宅急便包裹" />
+                          <input type="radio" class="form-radio" id="input_10_1" name="q10_typeA10" value="宅急便包裹" v-model="form.shipping_method" />
                           <label id="label_input_10_1" for="input_10_1"> 宅急便包裹 </label>
                         </span>
                       </div>
@@ -114,7 +117,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_12" class="form-input-wide jf-required">
-                      <input type="text" id="input_12" name="q12_typeA12" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_12" required="" v-model="wedding_mate_1" />
+                      <input type="text" id="input_12" name="q12_typeA12" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_12" required="" v-model="form.wedding_mate_1" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_textbox" id="id_13">
@@ -125,7 +128,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_13" class="form-input-wide jf-required">
-                      <input type="text" id="input_13" name="q13_typeA13" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_13" required="" v-model="wedding_mate_2" />
+                      <input type="text" id="input_13" name="q13_typeA13" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_13" required="" v-model="form.wedding_mate_2" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_textbox" id="id_14">
@@ -136,7 +139,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_14" class="form-input-wide jf-required">
-                      <input type="text" id="input_14" name="q14_typeA14" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_14" required="" v-model="wedding_date" />
+                      <input type="text" id="input_14" name="q14_typeA14" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_14" required="" v-model="form.wedding_date" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_textbox" id="id_15">
@@ -147,7 +150,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_15" class="form-input-wide jf-required">
-                      <input type="text" id="input_15" name="q15_typeA15" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_15" required="" v-model="wedding_time" />
+                      <input type="text" id="input_15" name="q15_typeA15" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_15" required="" v-model="form.wedding_time" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_textbox" id="id_16">
@@ -158,7 +161,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_16" class="form-input-wide jf-required">
-                      <input type="text" id="input_16" name="q16_typeA16" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_16" required="" v-model="wedding_location" />
+                      <input type="text" id="input_16" name="q16_typeA16" data-type="input-textbox" class="form-textbox validate[required]" size="20" value="" data-component="textbox" aria-labelledby="label_16" required="" v-model="form.wedding_location" />
                     </div>
                   </li>
                   <li class="form-line jf-required" data-type="control_textarea" id="id_17">
@@ -169,7 +172,7 @@ Cart =
                       </span>
                     </label>
                     <div id="cid_17" class="form-input-wide jf-required">
-                      <textarea id="input_17" class="form-textarea validate[required]" name="q17_typeA17" cols="40" rows="6" data-component="textarea" required="" aria-labelledby="label_17">${wedding_address}</textarea>
+                      <textarea id="input_17" class="form-textarea validate[required]" name="q17_typeA17" cols="40" rows="6" data-component="textarea" required="" aria-labelledby="label_17">${form.wedding_address}</textarea>
                     </div>
                   </li>
                   <li class="form-line" data-type="control_divider" id="id_18">
@@ -181,7 +184,13 @@ Cart =
                   <li class="form-line" data-type="control_textarea" id="id_19">
                     <label class="form-label form-label-top form-label-auto" id="label_19" for="input_19"> 訂單備註 </label>
                     <div id="cid_19" class="form-input-wide">
-                      <textarea id="input_19" class="form-textarea" name="q19_typeA19" cols="40" rows="6" data-component="textarea" aria-labelledby="label_19"></textarea>
+                      <textarea id="input_19" class="form-textarea" name="q19_typeA19" cols="40" rows="6" data-component="textarea" aria-labelledby="label_19">${form.order_note}</textarea>
+                    </div>
+                  </li>
+                  <li class="form-line" data-type="control_textarea" id="id_20" style="display:none;">
+                    <label class="form-label form-label-top form-label-auto" id="label_20" for="input_20"> 訂單內容 </label>
+                    <div id="cid_20" class="form-input-wide">
+                      <textarea id="input_20" class="form-textarea" name="q20_typeA20" cols="40" rows="6" data-component="textarea" aria-labelledby="label_20">${form.order_content}</textarea>
                     </div>
                   </li>
                   <li class="form-line" data-type="control_button" id="id_2">
@@ -203,7 +212,32 @@ Cart =
             </form>
           </div>
           <div class="column">
-            <h3 class="underline">訂購資訊</h3>
+            <div>
+              <h3 class="underline">訂購商品清單</h3>
+              <ul class="order-list">
+                <li class="list-item" v-for="(item, index) in this.$parent.$parent.cart">
+                  <div class="item-wrapper">
+                    <div class="item-image" :style="{ backgroundImage: 'url(/images/templates/thumbnail/' + item.template + '.jpg)' }"></div>
+                    <div class="item-content">
+                      <h4 class="item-title">${item.template}</h4>
+                      <div>
+                        數量：${item.total}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="underline">專人聯繫付款</h3>
+              <p>
+                ．我們會在24小時內審查您的訂單，審查完後會發「訂單確認信」到您Email並發送簡訊告知<br />
+                ．收到訂單確認信後，請回信告知匯款帳號末五碼<br />
+                ．您的訂單在入帳前將不會被排版、印製或出貨<br />
+                ．喜帖屬客製化商品，不適用七天鑑賞期可退貨之規定（商品瑕疵除外）<br />
+                ．喜帖印製需10個工作天（不含校稿時間、週末與假日）
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -212,26 +246,13 @@ Cart =
 
   data: ->
     {
-      wedding_mate_1: ''
-      wedding_mate_2: ''
-      wedding_date: ''
-      wedding_time: ''
-      wedding_location: ''
-      wedding_address: ''
+      form: {}
     }
 
   mounted: ->
-    if @$parent.$parent.wedding_mate_1 isnt ''
-      @wedding_mate_1 = @$parent.$parent.wedding_mate_1
-    if @$parent.$parent.wedding_mate_2 isnt ''
-      @wedding_mate_2 = @$parent.$parent.wedding_mate_2
-    if @$parent.$parent.wedding_date isnt ''
-      @wedding_date = @$parent.$parent.wedding_date
-    if @$parent.$parent.wedding_time isnt ''
-      @wedding_time = @$parent.$parent.wedding_time
-    if @$parent.$parent.wedding_location isnt ''
-      @wedding_location = @$parent.$parent.wedding_location
-    if @$parent.$parent.wedding_address isnt ''
-      @wedding_address = @$parent.$parent.wedding_address
-
-    document.getElementById("si" + "mple" + "_spc").value = "92921919688475-92921919688475"
+    if @$parent.$parent.cart.length > 0
+      @form = @$parent.$parent.form
+      @form.order_content = JSON.stringify @$parent.$parent.cart
+      setTimeout( ->
+        document.getElementById("si" + "mple" + "_spc").value = "92921919688475-92921919688475"
+      , 500)

@@ -1,0 +1,24 @@
+.order-list
+  list-style none
+  padding 0
+  margin 0
+  .item-wrapper
+    display flex
+    flex-direction row
+    flex-wrap nowrap
+    .item-image
+      display flex
+      flex 1
+      position relative
+      width 80px
+      height auto
+      background-size cover
+      background-position center
+      background-repeat no-repeat
+      &:before
+        content: ''
+        display block
+        padding-top 100%
+    .item-content
+      display flex
+      flex 1
